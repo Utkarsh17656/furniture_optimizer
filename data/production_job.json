@@ -1,0 +1,52 @@
+{
+    "job_id": "JOB-2024-001",
+    "sheet": {
+        "id": "S1",
+        "width": 2440,
+        "height": 1220,
+        "material": "Plywood 18mm"
+    },
+    "constraints": {
+        "kerf": 4.0,
+        "margin": 10.0,
+        "allow_rotation": true
+    },
+    "parts": [
+        {
+            "id": "P1",
+            "width": 600,
+            "height": 400,
+            "name": "Cabinet Side L"
+        },
+        {
+            "id": "P2",
+            "width": 600,
+            "height": 400,
+            "name": "Cabinet Side R"
+        },
+        {
+            "id": "P3",
+            "width": 800,
+            "height": 600,
+            "name": "Table Top"
+        },
+        {
+            "id": "P4",
+            "width": 300,
+            "height": 300,
+            "name": "Shelf 1"
+        },
+        {
+            "id": "P5",
+            "width": 300,
+            "height": 300,
+            "name": "Shelf 2"
+        },
+        {
+            "id": "P6",
+            "width": 1200,
+            "height": 200,
+            "name": "Long Rail"
+        }
+    ]
+}

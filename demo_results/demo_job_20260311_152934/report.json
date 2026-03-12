@@ -1,0 +1,43 @@
+{
+    "job": "demo_job",
+    "engine": "MaxRects Engine",
+    "timestamp": "20260311_152934",
+    "metrics": {
+        "sheets_used": 6,
+        "efficiency": 74.32209083579683,
+        "waste_area": 4586280.0,
+        "runtime": 0.0
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 90.3352593388874,
+            "placed_parts_count": 10
+        },
+        {
+            "index": 2,
+            "efficiency": 79.31671593657619,
+            "placed_parts_count": 9
+        },
+        {
+            "index": 3,
+            "efficiency": 63.20881483472185,
+            "placed_parts_count": 5
+        },
+        {
+            "index": 4,
+            "efficiency": 90.2983069067455,
+            "placed_parts_count": 8
+        },
+        {
+            "index": 5,
+            "efficiency": 81.84896533190002,
+            "placed_parts_count": 8
+        },
+        {
+            "index": 6,
+            "efficiency": 40.92448266595001,
+            "placed_parts_count": 4
+        }
+    ]
+}

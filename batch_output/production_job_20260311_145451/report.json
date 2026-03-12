@@ -1,0 +1,18 @@
+{
+    "job": "production_job",
+    "engine": "Shelf Engine",
+    "timestamp": "20260311_145451",
+    "metrics": {
+        "sheets_used": 1,
+        "efficiency": 46.358505778016664,
+        "waste_area": 1596800.0,
+        "runtime": 0.0
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 46.358505778016664,
+            "placed_parts_count": 6
+        }
+    ]
+}

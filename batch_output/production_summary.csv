@@ -1,0 +1,5 @@
+Timestamp,Job,Engine,Sheets,Efficiency,Waste Area,Runtime
+20260311_145450,batch_job_2,Shelf Engine,1,52.08%,690000.0,0.0000
+20260311_145450,example_input,Shelf Engine,1,75.19%,738400.0,0.0000
+20260311_145450,large_production_dataset,Shelf Engine,8,71.14%,6873560.0,0.0000
+20260311_145451,production_job,Shelf Engine,1,46.36%,1596800.0,0.0000

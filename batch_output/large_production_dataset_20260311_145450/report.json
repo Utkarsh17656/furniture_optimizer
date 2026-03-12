@@ -1,0 +1,53 @@
+{
+    "job": "large_production_dataset",
+    "engine": "Shelf Engine",
+    "timestamp": "20260311_145450",
+    "metrics": {
+        "sheets_used": 8,
+        "efficiency": 71.13695915076592,
+        "waste_area": 6873560.0,
+        "runtime": 0.0
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 86.72551061542596,
+            "placed_parts_count": 8
+        },
+        {
+            "index": 2,
+            "efficiency": 89.17156006449879,
+            "placed_parts_count": 7
+        },
+        {
+            "index": 3,
+            "efficiency": 87.33243751679656,
+            "placed_parts_count": 5
+        },
+        {
+            "index": 4,
+            "efficiency": 88.29400698736899,
+            "placed_parts_count": 6
+        },
+        {
+            "index": 5,
+            "efficiency": 64.51451222789572,
+            "placed_parts_count": 11
+        },
+        {
+            "index": 6,
+            "efficiency": 74.8902848696587,
+            "placed_parts_count": 4
+        },
+        {
+            "index": 7,
+            "efficiency": 69.36818059661381,
+            "placed_parts_count": 14
+        },
+        {
+            "index": 8,
+            "efficiency": 8.799180327868852,
+            "placed_parts_count": 5
+        }
+    ]
+}

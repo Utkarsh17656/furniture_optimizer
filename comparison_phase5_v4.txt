@@ -1,0 +1,36 @@
+﻿=== Furniture Optimizer: Phase 5 Benchmarking ===
+Constraints: Kerf=4.0mm, Margin=10.0mm, Rotation=Allowed
+
+Evaluating: Shelf Engine...
+
+==============================
+OPTIMIZATION SUMMARY
+==============================
+Algorithm Runtime: 0.0000s
+Sheets Used:       8
+Parts Placed:      60 / 60
+Overall Efficiency: 71.14%
+Total Waste Area:   6873560.00 mm▓
+==============================
+
+
+Evaluating: MaxRects Engine...
+
+==============================
+OPTIMIZATION SUMMARY
+==============================
+Algorithm Runtime: 0.0011s
+Sheets Used:       7
+Parts Placed:      60 / 60
+Overall Efficiency: 81.30%
+Total Waste Area:   3896760.00 mm▓
+==============================
+
+
+================================================================================
+Algorithm            | Sheets   | Utilization  | Waste (mm▓)     | Runtime   
+--------------------------------------------------------------------------------
+Shelf Engine         | 8        |      71.14% |      6873560.00 |   0.0000s
+MaxRects Engine      | 7        |      81.30% |      3896760.00 |   0.0011s
+================================================================================
+

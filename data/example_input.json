@@ -1,0 +1,88 @@
+{
+    "sheet": {
+        "id": "S1",
+        "width": 2440,
+        "height": 1220,
+        "material": "Plywood 18mm"
+    },
+    "parts": [
+        {
+            "id": "P1",
+            "width": 600,
+            "height": 400,
+            "name": "Cabinet Side Left"
+        },
+        {
+            "id": "P2",
+            "width": 600,
+            "height": 400,
+            "name": "Cabinet Side Right"
+        },
+        {
+            "id": "P3",
+            "width": 564,
+            "height": 400,
+            "name": "Cabinet Bottom"
+        },
+        {
+            "id": "P4",
+            "width": 564,
+            "height": 100,
+            "name": "Cabinet Rail Front"
+        },
+        {
+            "id": "P5",
+            "width": 564,
+            "height": 100,
+            "name": "Cabinet Rail Back"
+        },
+        {
+            "id": "P6",
+            "width": 800,
+            "height": 600,
+            "name": "Table Top"
+        },
+        {
+            "id": "P7",
+            "width": 300,
+            "height": 300,
+            "name": "Small Shelf 1"
+        },
+        {
+            "id": "P8",
+            "width": 300,
+            "height": 300,
+            "name": "Small Shelf 2"
+        },
+        {
+            "id": "P9",
+            "width": 200,
+            "height": 500,
+            "name": "Stretcher 1"
+        },
+        {
+            "id": "P10",
+            "width": 200,
+            "height": 500,
+            "name": "Stretcher 2"
+        },
+        {
+            "id": "P11",
+            "width": 1200,
+            "height": 200,
+            "name": "Long Rail"
+        },
+        {
+            "id": "P12",
+            "width": 400,
+            "height": 400,
+            "name": "Door 1"
+        },
+        {
+            "id": "P13",
+            "width": 400,
+            "height": 400,
+            "name": "Door 2"
+        }
+    ]
+}

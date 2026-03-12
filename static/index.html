@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Nesting Optimizer Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="accent">Nesting</span>Optimizer 2.0
+            </div>
+            <div class="tagline">Advanced Industrial Sheet Optimization Suite</div>
+        </header>
+
+        <main>
+            <section class="controls panel">
+                <h2>Control Panel</h2>
+                <div class="field">
+                    <label for="job-select">Select Production Job</label>
+                    <select id="job-select">
+                        <option value="" disabled selected>Loading jobs...</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Select Algorithm</label>
+                    <div class="engine-toggle">
+                        <button class="engine-btn active" data-engine="maxrects">MaxRects (Advanced)</button>
+                        <button class="engine-btn" data-engine="shelf">Shelf (Simple)</button>
+                    </div>
+                </div>
+                <button id="run-btn" class="primary-btn">Run Optimizer</button>
+            </section>
+
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Utilization</div>
+                    <div id="metric-efficiency" class="metric-value">0%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Wastage</div>
+                    <div id="metric-wastage" class="metric-value wastage-high">0%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Sheets Used</div>
+                    <div id="metric-sheets" class="metric-value">0</div>
+                </div>
+                <div id="status-chip" class="status-chip">Ready</div>
+            </section>
+
+            <section class="visualization-panel panel">
+                <div class="viz-header">
+                    <h2>Live Layout Visualization</h2>
+                    <div id="runtime-display" class="runtime">Runtime: 0.000s</div>
+                </div>
+                <div id="viz-container" class="viz-container">
+                    <div class="placeholder">Select a job and run to see layout</div>
+                    <img id="viz-img" src="" alt="Layout Visualization" style="display:none;">
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            Built with ❤️ for Furniture Manufacturing Research & Development
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

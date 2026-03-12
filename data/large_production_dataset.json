@@ -1,0 +1,370 @@
+{
+    "sheet": {
+        "id": "PROD-S1",
+        "width": 2440,
+        "height": 1220,
+        "material": "Plywood 18mm"
+    },
+    "parts": [
+        {
+            "id": "L-1",
+            "width": 1418,
+            "height": 734,
+            "name": "Large Panel 1"
+        },
+        {
+            "id": "L-2",
+            "width": 1329,
+            "height": 657,
+            "name": "Large Panel 2"
+        },
+        {
+            "id": "L-3",
+            "width": 1779,
+            "height": 480,
+            "name": "Large Panel 3"
+        },
+        {
+            "id": "L-4",
+            "width": 1761,
+            "height": 411,
+            "name": "Large Panel 4"
+        },
+        {
+            "id": "L-5",
+            "width": 1606,
+            "height": 560,
+            "name": "Large Panel 5"
+        },
+        {
+            "id": "L-6",
+            "width": 1784,
+            "height": 445,
+            "name": "Large Panel 6"
+        },
+        {
+            "id": "L-7",
+            "width": 1274,
+            "height": 755,
+            "name": "Large Panel 7"
+        },
+        {
+            "id": "L-8",
+            "width": 1248,
+            "height": 652,
+            "name": "Large Panel 8"
+        },
+        {
+            "id": "L-9",
+            "width": 1488,
+            "height": 715,
+            "name": "Large Panel 9"
+        },
+        {
+            "id": "L-10",
+            "width": 1687,
+            "height": 610,
+            "name": "Large Panel 10"
+        },
+        {
+            "id": "M-1",
+            "width": 484,
+            "height": 305,
+            "name": "Medium Part 1"
+        },
+        {
+            "id": "M-2",
+            "width": 549,
+            "height": 518,
+            "name": "Medium Part 2"
+        },
+        {
+            "id": "M-3",
+            "width": 770,
+            "height": 449,
+            "name": "Medium Part 3"
+        },
+        {
+            "id": "M-4",
+            "width": 440,
+            "height": 359,
+            "name": "Medium Part 4"
+        },
+        {
+            "id": "M-5",
+            "width": 444,
+            "height": 557,
+            "name": "Medium Part 5"
+        },
+        {
+            "id": "M-6",
+            "width": 731,
+            "height": 374,
+            "name": "Medium Part 6"
+        },
+        {
+            "id": "M-7",
+            "width": 749,
+            "height": 447,
+            "name": "Medium Part 7"
+        },
+        {
+            "id": "M-8",
+            "width": 700,
+            "height": 534,
+            "name": "Medium Part 8"
+        },
+        {
+            "id": "M-9",
+            "width": 771,
+            "height": 327,
+            "name": "Medium Part 9"
+        },
+        {
+            "id": "M-10",
+            "width": 670,
+            "height": 476,
+            "name": "Medium Part 10"
+        },
+        {
+            "id": "M-11",
+            "width": 449,
+            "height": 344,
+            "name": "Medium Part 11"
+        },
+        {
+            "id": "M-12",
+            "width": 475,
+            "height": 516,
+            "name": "Medium Part 12"
+        },
+        {
+            "id": "M-13",
+            "width": 693,
+            "height": 431,
+            "name": "Medium Part 13"
+        },
+        {
+            "id": "M-14",
+            "width": 432,
+            "height": 339,
+            "name": "Medium Part 14"
+        },
+        {
+            "id": "M-15",
+            "width": 501,
+            "height": 448,
+            "name": "Medium Part 15"
+        },
+        {
+            "id": "M-16",
+            "width": 781,
+            "height": 428,
+            "name": "Medium Part 16"
+        },
+        {
+            "id": "M-17",
+            "width": 663,
+            "height": 337,
+            "name": "Medium Part 17"
+        },
+        {
+            "id": "M-18",
+            "width": 769,
+            "height": 541,
+            "name": "Medium Part 18"
+        },
+        {
+            "id": "M-19",
+            "width": 625,
+            "height": 319,
+            "name": "Medium Part 19"
+        },
+        {
+            "id": "M-20",
+            "width": 678,
+            "height": 534,
+            "name": "Medium Part 20"
+        },
+        {
+            "id": "M-21",
+            "width": 524,
+            "height": 585,
+            "name": "Medium Part 21"
+        },
+        {
+            "id": "M-22",
+            "width": 423,
+            "height": 366,
+            "name": "Medium Part 22"
+        },
+        {
+            "id": "M-23",
+            "width": 615,
+            "height": 590,
+            "name": "Medium Part 23"
+        },
+        {
+            "id": "M-24",
+            "width": 518,
+            "height": 582,
+            "name": "Medium Part 24"
+        },
+        {
+            "id": "M-25",
+            "width": 733,
+            "height": 578,
+            "name": "Medium Part 25"
+        },
+        {
+            "id": "S-1",
+            "width": 118,
+            "height": 111,
+            "name": "Small Rail 1"
+        },
+        {
+            "id": "S-2",
+            "width": 496,
+            "height": 63,
+            "name": "Small Rail 2"
+        },
+        {
+            "id": "S-3",
+            "width": 449,
+            "height": 50,
+            "name": "Small Rail 3"
+        },
+        {
+            "id": "S-4",
+            "width": 118,
+            "height": 53,
+            "name": "Small Rail 4"
+        },
+        {
+            "id": "S-5",
+            "width": 486,
+            "height": 136,
+            "name": "Small Rail 5"
+        },
+        {
+            "id": "S-6",
+            "width": 359,
+            "height": 57,
+            "name": "Small Rail 6"
+        },
+        {
+            "id": "S-7",
+            "width": 137,
+            "height": 134,
+            "name": "Small Rail 7"
+        },
+        {
+            "id": "S-8",
+            "width": 588,
+            "height": 164,
+            "name": "Small Rail 8"
+        },
+        {
+            "id": "S-9",
+            "width": 441,
+            "height": 155,
+            "name": "Small Rail 9"
+        },
+        {
+            "id": "S-10",
+            "width": 387,
+            "height": 98,
+            "name": "Small Rail 10"
+        },
+        {
+            "id": "S-11",
+            "width": 490,
+            "height": 170,
+            "name": "Small Rail 11"
+        },
+        {
+            "id": "S-12",
+            "width": 216,
+            "height": 137,
+            "name": "Small Rail 12"
+        },
+        {
+            "id": "S-13",
+            "width": 366,
+            "height": 171,
+            "name": "Small Rail 13"
+        },
+        {
+            "id": "S-14",
+            "width": 136,
+            "height": 152,
+            "name": "Small Rail 14"
+        },
+        {
+            "id": "S-15",
+            "width": 383,
+            "height": 132,
+            "name": "Small Rail 15"
+        },
+        {
+            "id": "S-16",
+            "width": 352,
+            "height": 72,
+            "name": "Small Rail 16"
+        },
+        {
+            "id": "S-17",
+            "width": 134,
+            "height": 69,
+            "name": "Small Rail 17"
+        },
+        {
+            "id": "S-18",
+            "width": 201,
+            "height": 186,
+            "name": "Small Rail 18"
+        },
+        {
+            "id": "S-19",
+            "width": 325,
+            "height": 125,
+            "name": "Small Rail 19"
+        },
+        {
+            "id": "S-20",
+            "width": 201,
+            "height": 85,
+            "name": "Small Rail 20"
+        },
+        {
+            "id": "S-21",
+            "width": 599,
+            "height": 149,
+            "name": "Small Rail 21"
+        },
+        {
+            "id": "S-22",
+            "width": 500,
+            "height": 121,
+            "name": "Small Rail 22"
+        },
+        {
+            "id": "S-23",
+            "width": 373,
+            "height": 151,
+            "name": "Small Rail 23"
+        },
+        {
+            "id": "S-24",
+            "width": 135,
+            "height": 80,
+            "name": "Small Rail 24"
+        },
+        {
+            "id": "S-25",
+            "width": 120,
+            "height": 198,
+            "name": "Small Rail 25"
+        }
+    ]
+}

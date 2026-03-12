@@ -1,0 +1,2 @@
+﻿=== Furniture Optimizer: Phase 5 Benchmarking ===
+Constraints: Kerf=4.0mm, Margin=10.0mm, Rotation=Allowed

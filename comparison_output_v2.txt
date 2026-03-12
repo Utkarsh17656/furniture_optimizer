@@ -1,0 +1,35 @@
+﻿=== Furniture Optimizer: Algorithm Comparison Benchmark ===
+
+Evaluating: Shelf Engine...
+
+==============================
+OPTIMIZATION SUMMARY
+==============================
+Algorithm Runtime: 0.0000s
+Sheets Used:       1
+Parts Placed:      6 / 6
+Overall Efficiency: 43.62%
+Total Waste Area:   1678400.00 mm▓
+==============================
+
+
+Evaluating: MaxRects Engine...
+
+==============================
+OPTIMIZATION SUMMARY
+==============================
+Algorithm Runtime: 0.0000s
+Sheets Used:       1
+Parts Placed:      6 / 6
+Overall Efficiency: 43.62%
+Total Waste Area:   1678400.00 mm▓
+==============================
+
+
+================================================================================
+Algorithm            | Sheets   | Utilization  | Waste (mm▓)     | Runtime   
+--------------------------------------------------------------------------------
+Shelf Engine         | 1        |      43.62% |      1678400.00 |   0.0000s
+MaxRects Engine      | 1        |      43.62% |      1678400.00 |   0.0000s
+================================================================================
+

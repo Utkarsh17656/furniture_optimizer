@@ -1,0 +1,280 @@
+{
+    "job_id": "DEMO-RUN-001",
+    "sheet": {
+        "id": "SHEET-A",
+        "width": 2440,
+        "height": 1220,
+        "material": "Plywood 18mm"
+    },
+    "constraints": {
+        "kerf": 4.0,
+        "margin": 10.0,
+        "allow_rotation": true
+    },
+    "parts": [
+        {
+            "id": "GA-1",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-2",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-3",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-4",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-5",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-6",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-7",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "GA-8",
+            "width": 720,
+            "height": 560,
+            "name": "Gable Side"
+        },
+        {
+            "id": "CA-1",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-2",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-3",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-4",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-5",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-6",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-7",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-8",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-9",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "CA-10",
+            "width": 600,
+            "height": 560,
+            "name": "Cabinet Top/Bottom"
+        },
+        {
+            "id": "SH-1",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-2",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-3",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-4",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-5",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-6",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-7",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-8",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-9",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-10",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-11",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "SH-12",
+            "width": 564,
+            "height": 540,
+            "name": "Shelf"
+        },
+        {
+            "id": "BA-1",
+            "width": 700,
+            "height": 580,
+            "name": "Back Panel"
+        },
+        {
+            "id": "BA-2",
+            "width": 700,
+            "height": 580,
+            "name": "Back Panel"
+        },
+        {
+            "id": "BA-3",
+            "width": 700,
+            "height": 580,
+            "name": "Back Panel"
+        },
+        {
+            "id": "BA-4",
+            "width": 700,
+            "height": 580,
+            "name": "Back Panel"
+        },
+        {
+            "id": "DR-1",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-2",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-3",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-4",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-5",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-6",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-7",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "DR-8",
+            "width": 595,
+            "height": 145,
+            "name": "Drawer Front"
+        },
+        {
+            "id": "PL-1",
+            "width": 2400,
+            "height": 150,
+            "name": "Plinth"
+        },
+        {
+            "id": "PL-2",
+            "width": 2400,
+            "height": 150,
+            "name": "Plinth"
+        }
+    ]
+}
