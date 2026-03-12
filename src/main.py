@@ -24,9 +24,7 @@ def load_data(json_path: str) -> tuple[Optional[Sheet], List[Part], Optional[Man
         sheet = Sheet(
             id=sheet_data['id'],
             width=float(sheet_data['width']),
-            height=float(sheet_data['height']),
-            material=sheet_data.get('material', 'Standard')
-        )
+            height=float(shee
         
         parts = []
         for p in data.get('parts', []):
@@ -60,7 +58,9 @@ def main():
     
     print(f"Loading data from {input_path}...")    # Load Data
     sheet, parts, file_constraints = load_data(input_path)
-    if not sheet:
+    if not sheet:t_data['height']),
+            material=sheet_data.get('material', 'Standard')
+        )
         print("Failed to load sheet data.")
         return
         

@@ -12,20 +12,24 @@ from src.utils.visualizer import Visualizer
 
 from src.models.models import ManufacturingConstraints
 
-def compare_engines():
+import argparse
+
+def compare_engines(job_filename: str = None):
     print("=== Furniture Optimizer: Benchmarking Framework ===")
     
     data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-    input_path = os.path.join(data_dir, 'large_production_dataset.json')
+    
+    if job_filename:
+        input_path = os.path.join(data_dir, job_filename)
+    else:
+        input_path = os.path.join(data_dir, 'demo_job.json')
+        if not os.path.exists(input_path):
+            input_path = os.path.join(data_dir, 'example_input.json')
     
     sheet, parts, _ = load_data(input_path)
     if not sheet:
-        # Try example input if large dataset is missing
-        input_path = os.path.join(data_dir, 'example_input.json')
-        sheet, parts, _ = load_data(input_path)
-        if not sheet:
-            print("Error: Could not load dataset.")
-            return
+        print(f"Error: Could not load dataset at {input_path}")
+        return
 
     # Define common constraints
     constraints = ManufacturingConstraints(
@@ -58,4 +62,7 @@ def compare_engines():
     print("="*105 + "\n")
 
 if __name__ == "__main__":
-    compare_engines()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", help="Filename of the job in data/ directory")
+    args = parser.parse_args()
+    compare_engines(args.input)
