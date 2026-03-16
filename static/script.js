@@ -77,6 +77,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 metricWastage.classList.remove('wastage-high');
             }
 
+            // Handle Waste Data Table
+            const wasteSection = document.getElementById('waste-data-section');
+            const wasteTableBody = document.getElementById('waste-table-body');
+            
+            if (result.waste_details && result.waste_details.length > 0) {
+                wasteTableBody.innerHTML = result.waste_details.map(row => `
+                    <tr>
+                        <td>${row.sheet_id} - [${row.sheet_index}]</td>
+                        <td><span class="alg-badge">${row.algorithm}</span></td>
+                        <td>${row.material}</td>
+                        <td style="color: var(--accent); font-weight: 600;">${row.waste_area.toFixed(2)} sq units</td>
+                        <td>${new Date(row.timestamp).toLocaleTimeString()}</td>
+                    </tr>
+                `).join('');
+                wasteSection.style.display = 'block';
+            } else {
+                wasteSection.style.display = 'none';
+            }
+
             // Update Visualization
             vizImg.src = result.viz_url + '?t=' + new Date().getTime(); // Prevent caching
             vizImg.style.display = 'block';
@@ -91,6 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
             runBtn.disabled = false;
             runBtn.innerText = "Run Optimizer";
         }
+    });
+
+    // 4. Download CSV Action
+    const downloadCsvBtn = document.getElementById('download-csv-btn');
+    downloadCsvBtn.addEventListener('click', () => {
+        window.location.href = '/api/download_inventory';
     });
 
     fetchJobs();

@@ -1,0 +1,106 @@
+[
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 0,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 460125.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 1,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 471325.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 2,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 288800.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 3,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 391165.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 4,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 976890.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 5,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 1997975.0,
+        "timestamp": "2026-03-16T10:51:10.713985"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 0,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 287700.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 1,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 615700.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 2,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 1095200.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 3,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 288800.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 4,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 540320.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "demo_job.json",
+        "sheet_index": 5,
+        "sheet_id": "SHEET-A",
+        "material": "Plywood 18mm",
+        "waste_area": 1758560.0,
+        "timestamp": "2026-03-16T11:03:54.779182"
+    },
+    {
+        "job_file": "batch_job_2.json",
+        "sheet_index": 0,
+        "sheet_id": "S1",
+        "material": "Small Board",
+        "waste_area": 690000.0,
+        "timestamp": "2026-03-16T11:04:09.913163"
+    }
+]

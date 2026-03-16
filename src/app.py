@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
 import json
+import csv
+from flask import send_file
 from datetime import datetime
 import base64
 from src.main import load_data
@@ -47,6 +49,34 @@ def optimize():
 
     result = engine.optimize(sheet, parts, constraints)
     
+    # Save waste area to CSV inventory
+    inventory_path = os.path.join(DATA_DIR, 'inventory.csv')
+    file_has_content = os.path.exists(inventory_path) and os.path.getsize(inventory_path) > 0
+    
+    timestamp_str = datetime.now().isoformat()
+    waste_details = []
+    
+    with open(inventory_path, 'a', newline='') as csvfile:
+        fieldnames = ['job_file', 'algorithm', 'sheet_index', 'sheet_id', 'material', 'waste_area', 'timestamp']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        
+        if not file_has_content:
+            writer.writeheader()
+            
+        for i, res_sheet in enumerate(result.sheets):
+            if res_sheet.waste_area > 0:
+                row = {
+                    "job_file": job_filename,
+                    "algorithm": engine.name,
+                    "sheet_index": i,
+                    "sheet_id": res_sheet.sheet.id,
+                    "material": res_sheet.sheet.material,
+                    "waste_area": round(res_sheet.waste_area, 2),
+                    "timestamp": timestamp_str
+                }
+                writer.writerow(row)
+                waste_details.append(row)
+    
     # Save visualization for frontend
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     viz_filename = f"viz_{timestamp}.png"
@@ -66,8 +96,18 @@ def optimize():
             "waste": round(result.total_waste_area, 2),
             "runtime": round(result.runtime_seconds, 4)
         },
+        "waste_details": waste_details,
         "viz_url": f"/output/{viz_filename}"
     })
+
+@app.route('/api/download_inventory', methods=['GET'])
+def download_inventory():
+    """Allows downloading the CSV inventory file."""
+    inventory_path = os.path.join(DATA_DIR, 'inventory.csv')
+    if os.path.exists(inventory_path):
+        return send_file(inventory_path, as_attachment=True, download_name='inventory.csv')
+    else:
+        return jsonify({"error": "Inventory file not found"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

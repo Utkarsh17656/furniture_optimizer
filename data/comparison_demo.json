@@ -1,0 +1,399 @@
+{
+    "sheet": {
+        "id": "SHEET-DEMO",
+        "width": 2440,
+        "height": 1220,
+        "material": "Plywood 18mm"
+    },
+    "constraints": {
+        "kerf": 4.0,
+        "margin": 10.0,
+        "allow_rotation": true
+    },
+    "parts": [
+        {
+            "id": "TALL-1",
+            "width": 200,
+            "height": 1100,
+            "name": "Tall Panel"
+        },
+        {
+            "id": "TALL-2",
+            "width": 200,
+            "height": 1100,
+            "name": "Tall Panel"
+        },
+        {
+            "id": "TALL-3",
+            "width": 200,
+            "height": 1100,
+            "name": "Tall Panel"
+        },
+        {
+            "id": "TALL-4",
+            "width": 200,
+            "height": 1100,
+            "name": "Tall Panel"
+        },
+        {
+            "id": "WIDE-5",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-6",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-7",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-8",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-9",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-10",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-11",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-12",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-13",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-14",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-15",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-16",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-17",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-18",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-19",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-20",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-21",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-22",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-23",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "WIDE-24",
+            "width": 500,
+            "height": 200,
+            "name": "Wide Shelf"
+        },
+        {
+            "id": "SMALL-25",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-26",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-27",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-28",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-29",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-30",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-31",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-32",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-33",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-34",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-35",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-36",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-37",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-38",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-39",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-40",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-41",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-42",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-43",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-44",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-45",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-46",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-47",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-48",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-49",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-50",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-51",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-52",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-53",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-54",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-55",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-56",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-57",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-58",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-59",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-60",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-61",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-62",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-63",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        },
+        {
+            "id": "SMALL-64",
+            "width": 150,
+            "height": 150,
+            "name": "Small Filler"
+        }
+    ]
+}
