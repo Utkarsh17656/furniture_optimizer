@@ -20,10 +20,79 @@
             <section class="controls panel">
                 <h2>Control Panel</h2>
                 <div class="field">
+                    <label>Input Method</label>
+                    <div class="engine-toggle" id="input-method-toggle">
+                        <button class="engine-btn active" data-method="json">JSON File</button>
+                        <button class="engine-btn" data-method="manual">Manual Entry</button>
+                    </div>
+                </div>
+
+                <div class="field" id="json-input-group">
                     <label for="job-select">Select Production Job</label>
                     <select id="job-select">
                         <option value="" disabled selected>Loading jobs...</option>
                     </select>
+                </div>
+
+                <div id="manual-input-group" style="display: none;">
+                    <div class="sub-panel">
+                        <h3>Sheet Details</h3>
+                        <div class="input-row">
+                            <div class="field half">
+                                <label for="sheet-width">Width</label>
+                                <input type="number" id="sheet-width" value="2400" min="1">
+                            </div>
+                            <div class="field half">
+                                <label for="sheet-height">Height</label>
+                                <input type="number" id="sheet-height" value="1200" min="1">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="sheet-material">Material</label>
+                            <input type="text" id="sheet-material" value="Plywood 18mm">
+                        </div>
+                    </div>
+
+                    <div class="sub-panel" style="margin-top: 1rem;">
+                        <h3>Constraints</h3>
+                        <div class="input-row">
+                            <div class="field half">
+                                <label for="kerf">Kerf (mm)</label>
+                                <input type="number" id="kerf" value="4" step="0.1" min="0">
+                            </div>
+                            <div class="field half">
+                                <label for="margin">Margin (mm)</label>
+                                <input type="number" id="margin" value="10" step="0.1" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-panel" style="margin-top: 1rem;">
+                        <div class="viz-header" style="margin-bottom: 0.5rem;">
+                            <h3>Parts List</h3>
+                            <button id="add-part-btn" class="icon-btn" title="Add Part">+ Add</button>
+                        </div>
+                        <div class="parts-table-wrapper">
+                            <table class="parts-input-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>W</th>
+                                        <th>H</th>
+                                        <th>Qty</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="parts-tbody">
+                                    <!-- Part rows added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="field" style="margin-top: 0.5rem;">
+                            <label for="csv-upload" class="secondary-btn" style="display: inline-block; text-align: center; font-size: 0.8rem; padding: 0.5rem; cursor: pointer;">Upload CSV</label>
+                            <input type="file" id="csv-upload" accept=".csv" style="display: none;">
+                        </div>
+                    </div>
                 </div>
                 <div class="field">
                     <label>Select Algorithm</label>
@@ -69,6 +138,9 @@
                         <tbody id="waste-table-body">
                             <!-- Populated dynamically -->
                         </tbody>
+                        <tfoot id="waste-table-foot">
+                            <!-- Populated dynamically for total -->
+                        </tfoot>
                     </table>
                 </div>
             </section>

@@ -153,6 +153,105 @@ select:focus {
     transform: none;
 }
 
+input[type="number"], input[type="text"] {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.75rem;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--accent);
+}
+
+.input-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.field.half {
+    flex: 1;
+}
+
+.sub-panel {
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--glass-border);
+}
+
+.sub-panel h3 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.icon-btn {
+    background: var(--accent);
+    color: var(--bg-dark);
+    border: none;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: opacity 0.2s;
+}
+
+.icon-btn:hover {
+    opacity: 0.8;
+}
+
+.icon-btn.remove-btn {
+    background: rgba(251, 113, 133, 0.2);
+    color: #fb7185;
+}
+.icon-btn.remove-btn:hover {
+    background: #fb7185;
+    color: var(--bg-dark);
+}
+
+.parts-table-wrapper {
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+.parts-input-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.parts-input-table th {
+    background: rgba(15, 23, 42, 0.8);
+    position: sticky;
+    top: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: 0.5rem;
+    z-index: 1;
+}
+
+.parts-input-table td {
+    padding: 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.parts-input-table input {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
 .secondary-btn {
     width: 100%;
     background: rgba(15, 23, 42, 0.5);
