@@ -1,0 +1,20 @@
+{
+    "job": "example_input",
+    "engine": "Intelligent (MaxRects - Area Descending)",
+    "timestamp": "20260318_141614",
+    "metrics": {
+        "sheets_used": 1,
+        "efficiency": 75.19484009674818,
+        "wastage": 24.80515990325182,
+        "waste_area": 738400.0,
+        "runtime": 0.006908416748046875
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 75.19484009674818,
+            "wastage": 24.80515990325182,
+            "placed_parts_count": 13
+        }
+    ]
+}

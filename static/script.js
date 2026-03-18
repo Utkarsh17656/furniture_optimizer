@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Run Optimization
     runBtn.addEventListener('click', async () => {
         let payload = { engine: selectedEngine };
+        payload.cost_per_sheet = parseFloat(document.getElementById('cost-per-sheet').value) || 0;
 
         if (inputMethod === 'json') {
             const jobFile = jobSelect.value;
@@ -200,6 +201,49 @@ document.addEventListener('DOMContentLoaded', () => {
             metricWastage.innerText = `${result.metrics.wastage}%`;
             metricSheets.innerText = result.metrics.sheets;
             runtimeDisplay.innerText = `Runtime: ${result.metrics.runtime}s`;
+            
+            const metricMatCost = document.getElementById('metric-material-cost');
+            const metricWasteCost = document.getElementById('metric-waste-cost');
+            const metricSavings = document.getElementById('metric-baseline-savings');
+            
+            if (metricMatCost && result.metrics.material_cost !== undefined) {
+                metricMatCost.innerText = `₹${result.metrics.material_cost.toFixed(2)}`;
+            }
+            if (metricWasteCost && result.metrics.waste_cost !== undefined) {
+                metricWasteCost.innerText = `₹${result.metrics.waste_cost.toFixed(2)}`;
+            }
+            if (metricSavings && result.metrics.baseline_savings !== undefined) {
+                metricSavings.innerText = `₹${result.metrics.baseline_savings.toFixed(2)}`;
+            }
+
+            // Comparative Analysis Table
+            const compSection = document.getElementById('comparative-analysis-section');
+            const compTableBody = document.getElementById('comparative-table-body');
+            
+            if (result.candidates_data && result.candidates_data.length > 0) {
+                compTableBody.innerHTML = result.candidates_data.map((c, i) => `
+                    <tr style="${i === 0 ? 'background: rgba(34, 197, 94, 0.1); font-weight: 600;' : ''}">
+                        <td>${c.algorithm} ${i === 0 ? '<span class="alg-badge" style="background: var(--success); margin-left:8px;">BEST</span>' : ''}</td>
+                        <td>${c.sheets}</td>
+                        <td>${c.utilization.toFixed(2)}%</td>
+                        <td>${c.wastage.toFixed(2)}%</td>
+                        <td>₹${c.material_cost.toFixed(2)}</td>
+                    </tr>
+                `).join('');
+                compSection.style.display = 'block';
+            } else if (compSection) {
+                // Not intelligent mode, hide it or just show the single result
+                compSection.style.display = 'block';
+                compTableBody.innerHTML = `
+                    <tr style="background: rgba(34, 197, 94, 0.1); font-weight: 600;">
+                        <td>${result.engine} <span class="alg-badge" style="background: var(--success); margin-left:8px;">SINGLE</span></td>
+                        <td>${result.metrics.sheets}</td>
+                        <td>${result.metrics.efficiency.toFixed(2)}%</td>
+                        <td>${result.metrics.wastage.toFixed(2)}%</td>
+                        <td>₹${result.metrics.material_cost ? result.metrics.material_cost.toFixed(2) : '0.00'}</td>
+                    </tr>
+                `;
+            }
 
             // Color coding for wastage
             if (result.metrics.wastage > 25) {

@@ -63,7 +63,7 @@ class ShelfNestingEngine(NestingEngine):
                     # Add kerf if not the first part in shelf
                     offset_x = kerf if current_x > margin else 0
                     
-                    if temp_x + offset_x + w <= margin + eff_width:
+                    if temp_x + offset_x + w <= margin + eff_width and temp_y + h <= margin + eff_height:
                         # Fits in current shelf
                         placed_on_this_sheet.append(PlacedPart(part=part, x=temp_x + offset_x, y=temp_y, is_rotated=rotated))
                         current_x = temp_x + offset_x + w

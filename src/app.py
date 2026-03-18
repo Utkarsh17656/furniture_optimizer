@@ -8,6 +8,7 @@ import base64
 from src.main import load_data
 from src.engines.shelf_engine import ShelfNestingEngine
 from src.engines.maxrects_engine import MaxRectsEngine
+from src.engines.intelligent_engine import IntelligentEngine
 from src.models.models import ManufacturingConstraints, Sheet, Part
 
 app = Flask(__name__, static_folder='../static', static_url_path='')
@@ -64,7 +65,8 @@ def optimize():
             file_constraints = ManufacturingConstraints(
                 kerf=float(constraints_data.get('kerf', 0.0)),
                 margin=float(constraints_data.get('margin', 0.0)),
-                allow_rotation=bool(constraints_data.get('allow_rotation', True))
+                allow_rotation=bool(constraints_data.get('allow_rotation', True)),
+                cost_per_sheet=float(constraints_data.get('cost_per_sheet', 0.0))
             )
 
     elif 'job_file' in data:
@@ -72,6 +74,18 @@ def optimize():
         job_filename = data.get('job_file')
         input_path = os.path.join(DATA_DIR, job_filename)
         sheet, parts, file_constraints = load_data(input_path)
+        
+        # Merge global cost if provided
+        global_cost = float(data.get('cost_per_sheet', 0.0))
+        if file_constraints:
+            file_constraints = ManufacturingConstraints(
+                kerf=file_constraints.kerf,
+                margin=file_constraints.margin,
+                allow_rotation=file_constraints.allow_rotation,
+                cost_per_sheet=global_cost
+            )
+        else:
+            file_constraints = ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True, cost_per_sheet=global_cost)
     
     else:
         return jsonify({"error": "No job data or job file provided"}), 400
@@ -82,7 +96,9 @@ def optimize():
     constraints = file_constraints if file_constraints else ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True)
 
     try:
-        if engine_name.lower() == 'shelf':
+        if engine_name.lower() == 'intelligent':
+            engine = IntelligentEngine()
+        elif engine_name.lower() == 'shelf':
             engine = ShelfNestingEngine()
         else:
             engine = MaxRectsEngine()
@@ -131,6 +147,19 @@ def optimize():
         viz.plot_result(result, constraints, save_path=viz_path)
         print("Visualization generated.")
         
+        # Calculate total cost if missing for base results
+        total_material_cost, waste_cost = 0.0, 0.0
+        if isinstance(engine, IntelligentEngine):
+            from src.engines.intelligent_engine import Evaluator
+            total_material_cost, waste_cost = Evaluator.calculate_cost(result, constraints.cost_per_sheet)
+        else:
+            total_material_cost = len(result.sheets) * constraints.cost_per_sheet
+            for s in result.sheets:
+                sheet_area = s.sheet.width * s.sheet.height
+                if sheet_area > 0:
+                    fraction_wasted = s.waste_area / sheet_area
+                    waste_cost += fraction_wasted * constraints.cost_per_sheet
+
         return jsonify({
             "engine": engine.name,
             "metrics": {
@@ -138,8 +167,12 @@ def optimize():
                 "efficiency": round(result.overall_efficiency, 2),
                 "wastage": round(result.wastage_percentage, 2),
                 "waste": round(result.total_waste_area, 2),
-                "runtime": round(result.runtime_seconds, 4)
+                "runtime": round(result.runtime_seconds, 4),
+                "material_cost": round(total_material_cost, 2),
+                "waste_cost": round(waste_cost, 2),
+                "baseline_savings": round(getattr(result, 'baseline_savings', 0.0), 2)
             },
+            "candidates_data": getattr(result, 'candidates_data', []),
             "waste_details": waste_details,
             "viz_url": f"/output/{viz_filename}"
         })

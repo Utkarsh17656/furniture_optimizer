@@ -49,6 +49,7 @@ class ManufacturingConstraints:
     kerf: float = 0.0          # Saw blade thickness
     margin: float = 0.0        # Edge margin around the sheet
     allow_rotation: bool = True # Whether parts can be rotated 90 deg
+    cost_per_sheet: float = 0.0 # Cost per material sheet
 
 @dataclass
 class SheetResult:
@@ -77,6 +78,10 @@ class NestingResult:
     total_parts_placed: int = 0
     runtime_seconds: float = 0.0
     
+    # Store candidates if ran in intelligent mode
+    candidates_data: List[Dict] = field(default_factory=list)
+    baseline_savings: float = 0.0
+
     @property
     def total_used_area(self) -> float:
         return sum(s.used_area for s in self.sheets)

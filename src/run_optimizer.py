@@ -7,6 +7,7 @@ from datetime import datetime
 from src.main import load_data
 from src.engines.shelf_engine import ShelfNestingEngine
 from src.engines.maxrects_engine import MaxRectsEngine
+from src.engines.intelligent_engine import IntelligentEngine
 from src.utils.metrics import MetricsCalculator
 from src.utils.visualizer import Visualizer
 from src.models.models import ManufacturingConstraints
@@ -24,7 +25,9 @@ def run_production_job(input_path: str, engine_name: str, output_dir: str):
         constraints = ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True)
 
     # 2. Select Engine
-    if engine_name.lower() == 'maxrects':
+    if engine_name.lower() == 'intelligent':
+        engine = IntelligentEngine()
+    elif engine_name.lower() == 'maxrects':
         engine = MaxRectsEngine()
     else:
         engine = ShelfNestingEngine()
@@ -87,7 +90,7 @@ def run_production_job(input_path: str, engine_name: str, output_dir: str):
 def main():
     parser = argparse.ArgumentParser(description="Furniture Optimizer: Production Workflow Tool")
     parser.add_argument("--input", required=True, help="Path to input JSON job file or directory")
-    parser.add_argument("--engine", default="maxrects", choices=["shelf", "maxrects"], help="Nesting engine to use")
+    parser.add_argument("--engine", default="intelligent", choices=["shelf", "maxrects", "intelligent"], help="Nesting engine to use")
     parser.add_argument("--output", default="output", help="Directory for exported results")
 
     args = parser.parse_args()

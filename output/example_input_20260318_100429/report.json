@@ -1,0 +1,26 @@
+{
+    "job": "example_input",
+    "engine": "Shelf Engine",
+    "timestamp": "20260318_100429",
+    "metrics": {
+        "sheets_used": 2,
+        "efficiency": 37.59742004837409,
+        "wastage": 62.40257995162591,
+        "waste_area": 3715200.0,
+        "runtime": 0.0
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 67.13249126578876,
+            "wastage": 32.86750873421124,
+            "placed_parts_count": 12
+        },
+        {
+            "index": 2,
+            "efficiency": 8.062348830959419,
+            "wastage": 91.93765116904058,
+            "placed_parts_count": 1
+        }
+    ]
+}

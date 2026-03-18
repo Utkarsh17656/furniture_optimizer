@@ -142,3 +142,117 @@ Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,360000.0,2026-03-17T16:
 Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,840000.0,2026-03-17T16:52:46.509535
 Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,1680000.0,2026-03-17T17:05:45.810769
 Manual Entry,Shelf Engine,0,SHEET-MANUAL,Plywood 18mm,1680000.0,2026-03-17T17:06:33.539506
+example_input.json,MaxRects Engine,0,S1,Plywood 18mm,738400.0,2026-03-18T09:56:16.943773
+example_input.json,Shelf Engine,0,S1,Plywood 18mm,738400.0,2026-03-18T09:56:25.628533
+example_input.json,MaxRects Engine,0,S1,Plywood 18mm,738400.0,2026-03-18T09:57:54.693327
+example_input.json,Shelf Engine,0,S1,Plywood 18mm,738400.0,2026-03-18T09:57:59.415268
+example_input.json,Shelf Engine,0,S1,Plywood 18mm,978400.0,2026-03-18T10:15:38.247569
+example_input.json,Shelf Engine,1,S1,Plywood 18mm,2736800.0,2026-03-18T10:15:38.247569
+batch_job_2.json,MaxRects Engine,0,S1,Small Board,690000.0,2026-03-18T10:57:24.530595
+comparison_demo.json,MaxRects Engine,0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-18T10:57:39.581479
+comparison_demo.json,MaxRects Engine,1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-18T10:57:39.581479
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:00:56.812283
+Manual Entry,Shelf Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:02:29.237089
+comparison_demo.json,Shelf Engine,0,SHEET-DEMO,Plywood 18mm,1796800.0,2026-03-18T11:10:50.647202
+comparison_demo.json,Shelf Engine,1,SHEET-DEMO,Plywood 18mm,669300.0,2026-03-18T11:10:50.647202
+comparison_demo.json,Shelf Engine,2,SHEET-DEMO,Plywood 18mm,2684300.0,2026-03-18T11:10:50.647202
+comparison_demo.json,MaxRects Engine,0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-18T11:11:33.788572
+comparison_demo.json,MaxRects Engine,1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-18T11:11:33.788572
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:25:53.444068
+Manual Entry,Shelf Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:26:02.833850
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:26:06.811946
+Manual Entry,Shelf Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:26:14.026643
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T11:26:20.641576
+Manual Entry,Shelf Engine,0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T13:11:22.228698
+example_input.json,Intelligent (MaxRects - Area Descending),0,S1,Plywood 18mm,738400.0,2026-03-18T14:22:08.523232
+Manual Entry,MaxRects Engine,0,MANUAL-S,TestMat,1680000.0,2026-03-18T14:22:09.420186
+demo_job.json,Intelligent (MaxRects - Area Descending),0,SHEET-A,Plywood 18mm,287700.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),1,SHEET-A,Plywood 18mm,615700.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),2,SHEET-A,Plywood 18mm,1095200.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),3,SHEET-A,Plywood 18mm,288800.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),4,SHEET-A,Plywood 18mm,540320.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),5,SHEET-A,Plywood 18mm,1758560.0,2026-03-18T14:25:16.702673
+demo_job.json,Intelligent (MaxRects - Area Descending),0,SHEET-A,Plywood 18mm,287700.0,2026-03-18T14:43:13.801224
+demo_job.json,Intelligent (MaxRects - Area Descending),1,SHEET-A,Plywood 18mm,615700.0,2026-03-18T14:43:13.801224
+demo_job.json,Intelligent (MaxRects - Area Descending),2,SHEET-A,Plywood 18mm,1095200.0,2026-03-18T14:43:13.801224
+demo_job.json,Intelligent (MaxRects - Area Descending),3,SHEET-A,Plywood 18mm,288800.0,2026-03-18T14:43:13.801224
+demo_job.json,Intelligent (MaxRects - Area Descending),4,SHEET-A,Plywood 18mm,540320.0,2026-03-18T14:43:13.801224
+demo_job.json,Intelligent (MaxRects - Area Descending),5,SHEET-A,Plywood 18mm,1758560.0,2026-03-18T14:43:13.801224
+demo_job.json,MaxRects Engine,0,SHEET-A,Plywood 18mm,287700.0,2026-03-18T14:43:31.543012
+demo_job.json,MaxRects Engine,1,SHEET-A,Plywood 18mm,615700.0,2026-03-18T14:43:31.543012
+demo_job.json,MaxRects Engine,2,SHEET-A,Plywood 18mm,1095200.0,2026-03-18T14:43:31.543012
+demo_job.json,MaxRects Engine,3,SHEET-A,Plywood 18mm,288800.0,2026-03-18T14:43:31.543012
+demo_job.json,MaxRects Engine,4,SHEET-A,Plywood 18mm,540320.0,2026-03-18T14:43:31.543012
+demo_job.json,MaxRects Engine,5,SHEET-A,Plywood 18mm,1758560.0,2026-03-18T14:43:31.543012
+demo_job.json,Shelf Engine,0,SHEET-A,Plywood 18mm,460125.0,2026-03-18T14:43:37.861011
+demo_job.json,Shelf Engine,1,SHEET-A,Plywood 18mm,471325.0,2026-03-18T14:43:37.861011
+demo_job.json,Shelf Engine,2,SHEET-A,Plywood 18mm,288800.0,2026-03-18T14:43:37.861011
+demo_job.json,Shelf Engine,3,SHEET-A,Plywood 18mm,391165.0,2026-03-18T14:43:37.861011
+demo_job.json,Shelf Engine,4,SHEET-A,Plywood 18mm,976890.0,2026-03-18T14:43:37.861011
+demo_job.json,Shelf Engine,5,SHEET-A,Plywood 18mm,1997975.0,2026-03-18T14:43:37.861011
+comparison_demo.json,Shelf Engine,0,SHEET-DEMO,Plywood 18mm,1796800.0,2026-03-18T14:43:43.123964
+comparison_demo.json,Shelf Engine,1,SHEET-DEMO,Plywood 18mm,669300.0,2026-03-18T14:43:43.123964
+comparison_demo.json,Shelf Engine,2,SHEET-DEMO,Plywood 18mm,2684300.0,2026-03-18T14:43:43.123964
+comparison_demo.json,MaxRects Engine,0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-18T14:43:49.066274
+comparison_demo.json,MaxRects Engine,1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-18T14:43:49.066274
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-18T14:43:53.907033
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-18T14:43:53.907033
+example_input.json,Intelligent (MaxRects - Area Descending),0,S1,Plywood 18mm,738400.0,2026-03-18T14:54:48.121195
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T14:59:30.037183
+large_production_dataset.json,MaxRects Engine,0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,MaxRects Engine,6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T14:59:52.302233
+large_production_dataset.json,Shelf Engine,0,PROD-S1,Plywood 18mm,395155.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,1,PROD-S1,Plywood 18mm,322341.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,2,PROD-S1,Plywood 18mm,377088.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,3,PROD-S1,Plywood 18mm,509424.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,4,PROD-S1,Plywood 18mm,715716.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,5,PROD-S1,Plywood 18mm,754302.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,6,PROD-S1,Plywood 18mm,883234.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Shelf Engine,7,PROD-S1,Plywood 18mm,2916300.0,2026-03-18T14:59:55.244969
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T14:59:58.784875
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T14:59:58.784875
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,2280000.0,2026-03-18T15:00:25.988951
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T15:02:10.204104
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T15:17:51.437488
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T15:38:24.193675
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),0,PROD-S1,Plywood 18mm,140140.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),1,PROD-S1,Plywood 18mm,185751.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),2,PROD-S1,Plywood 18mm,233560.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1,Plywood 18mm,270070.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T15:42:44.676580
+large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T15:42:44.676580
