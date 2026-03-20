@@ -256,3 +256,161 @@ large_production_dataset.json,Intelligent (MaxRects - Area Descending),3,PROD-S1
 large_production_dataset.json,Intelligent (MaxRects - Area Descending),4,PROD-S1,Plywood 18mm,376793.0,2026-03-18T15:42:44.676580
 large_production_dataset.json,Intelligent (MaxRects - Area Descending),5,PROD-S1,Plywood 18mm,385343.0,2026-03-18T15:42:44.676580
 large_production_dataset.json,Intelligent (MaxRects - Area Descending),6,PROD-S1,Plywood 18mm,2305103.0,2026-03-18T15:42:44.676580
+batch_job_2.json,Intelligent (MaxRects - Area Descending),0,S1,Small Board,690000.0,2026-03-19T10:25:53.982724
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T11:00:40.840779
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T11:00:40.840779
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T11:00:40.840779
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T11:00:40.840779
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T11:00:40.840779
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T11:00:40.840779
+Manual Entry,MaxRects Engine,0,MANUAL-S,TestMat,1680000.0,2026-03-19T11:00:41.722656
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T11:04:46.589702
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T11:04:46.589702
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T11:04:46.589702
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T11:04:46.589702
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T11:04:46.589702
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T11:04:46.589702
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T11:05:32.489120
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T11:05:32.489120
+comparison_demo.json,MaxRects Engine,0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T11:41:39.998443
+comparison_demo.json,MaxRects Engine,1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T11:41:39.998443
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T11:41:54.193478
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T11:41:54.193478
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T12:10:01.833780
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T12:10:01.833780
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T12:10:01.833780
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T12:10:01.833780
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T12:10:01.833780
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T12:10:01.833780
+savings_demo.json,MaxRects Engine,0,S1,Test,2948.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,1,S1,Test,2897.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,2,S1,Test,3736.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,3,S1,Test,1702.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,4,S1,Test,1921.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,5,S1,Test,4567.0,2026-03-19T12:13:09.941665
+savings_demo.json,MaxRects Engine,6,S1,Test,8048.0,2026-03-19T12:13:09.941665
+savings_demo.json,Shelf Engine,0,S1,Test,2948.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,1,S1,Test,2897.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,2,S1,Test,3736.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,3,S1,Test,1087.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,4,S1,Test,2939.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,5,S1,Test,4342.0,2026-03-19T12:13:28.168970
+savings_demo.json,Shelf Engine,6,S1,Test,7870.0,2026-03-19T12:13:28.168970
+savings_demo.json,MaxRects Engine,0,S1,Test,2948.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,1,S1,Test,2897.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,2,S1,Test,3736.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,3,S1,Test,1702.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,4,S1,Test,1921.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,5,S1,Test,4567.0,2026-03-19T12:13:37.129344
+savings_demo.json,MaxRects Engine,6,S1,Test,8048.0,2026-03-19T12:13:37.129344
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T12:13:44.616367
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T12:13:44.616367
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T12:13:44.616367
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T12:13:44.616367
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T12:13:44.616367
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T12:13:44.616367
+savings_demo.json,MaxRects Engine,0,S1,Test,2948.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,1,S1,Test,2897.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,2,S1,Test,3736.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,3,S1,Test,1702.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,4,S1,Test,1921.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,5,S1,Test,4567.0,2026-03-19T12:14:44.767537
+savings_demo.json,MaxRects Engine,6,S1,Test,8048.0,2026-03-19T12:14:44.767537
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T12:28:23.955886
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T12:28:23.955886
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T12:28:23.955886
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T12:28:23.955886
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T12:28:23.955886
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T12:28:23.955886
+savings_demo.json,MaxRects Engine,0,S1,Test,2948.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,1,S1,Test,2897.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,2,S1,Test,3736.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,3,S1,Test,1702.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,4,S1,Test,1921.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,5,S1,Test,4567.0,2026-03-19T12:28:36.751376
+savings_demo.json,MaxRects Engine,6,S1,Test,8048.0,2026-03-19T12:28:36.751376
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),0,S1,Test,2948.0,2026-03-19T12:33:19.058604
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),1,S1,Test,2897.0,2026-03-19T12:33:19.058604
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),2,S1,Test,3736.0,2026-03-19T12:33:19.058604
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),3,S1,Test,1117.0,2026-03-19T12:33:19.058604
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),4,S1,Test,2846.0,2026-03-19T12:33:19.058604
+savings_demo.json,Intelligent (Shelf - Area Descending (No Rotation)),5,S1,Test,2275.0,2026-03-19T12:33:19.058604
+Manual Entry,MaxRects Engine,0,MANUAL-S,TestMat,1680000.0,2026-03-19T12:45:20.888090
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),0,Sheet-1,Standard,191400.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),1,Sheet-1,Standard,308300.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),2,Sheet-1,Standard,323300.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),3,Sheet-1,Standard,322300.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),4,Sheet-1,Standard,500800.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),5,Sheet-1,Standard,585800.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),6,Sheet-1,Standard,654800.0,2026-03-19T12:46:19.924639
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),7,Sheet-1,Standard,2166800.0,2026-03-19T12:46:19.924639
+Manual Entry,MaxRects Engine,0,MANUAL-S,TestMat,1680000.0,2026-03-19T12:46:25.219385
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),0,Sheet-1,Standard,191400.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),1,Sheet-1,Standard,308300.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),2,Sheet-1,Standard,323300.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),3,Sheet-1,Standard,322300.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),4,Sheet-1,Standard,500800.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),5,Sheet-1,Standard,585800.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),6,Sheet-1,Standard,654800.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),7,Sheet-1,Standard,2166800.0,2026-03-19T12:54:04.366581
+complex_savings_demo.json,MaxRects Engine,0,Sheet-1,Standard,191400.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,1,Sheet-1,Standard,308300.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,2,Sheet-1,Standard,323300.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,3,Sheet-1,Standard,322300.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,4,Sheet-1,Standard,500800.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,5,Sheet-1,Standard,795800.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,6,Sheet-1,Standard,664800.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,7,Sheet-1,Standard,2146800.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,MaxRects Engine,8,Sheet-1,Standard,2776800.0,2026-03-19T12:54:29.565810
+complex_savings_demo.json,Shelf Engine,0,Sheet-1,Standard,918900.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,1,Sheet-1,Standard,506800.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,2,Sheet-1,Standard,505800.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,3,Sheet-1,Standard,869300.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,4,Sheet-1,Standard,216800.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,5,Sheet-1,Standard,501800.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,6,Sheet-1,Standard,653300.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Shelf Engine,7,Sheet-1,Standard,880800.0,2026-03-19T12:54:35.340439
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),0,Sheet-1,Standard,191400.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),1,Sheet-1,Standard,308300.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),2,Sheet-1,Standard,323300.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),3,Sheet-1,Standard,322300.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),4,Sheet-1,Standard,500800.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),5,Sheet-1,Standard,585800.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),6,Sheet-1,Standard,654800.0,2026-03-19T12:54:40.304577
+complex_savings_demo.json,Intelligent (MaxRects - Height Descending),7,Sheet-1,Standard,2166800.0,2026-03-19T12:54:40.304577
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T15:48:50.968865
+Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,730000.0,2026-03-19T15:48:50.968865
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T15:53:54.021342
+Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,1210000.0,2026-03-19T15:53:54.021342
+batch_job_2.json,MaxRects Engine,0,S1,Small Board,690000.0,2026-03-19T15:54:19.541345
+batch_job_2.json,Intelligent (MaxRects - Area Descending),0,S1,Small Board,690000.0,2026-03-19T15:54:28.744201
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T15:54:42.121622
+Manual Entry,Intelligent (MaxRects - Area Descending),1,SHEET-MANUAL,Plywood 18mm,1210000.0,2026-03-19T15:54:42.121622
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T15:56:14.551712
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T15:56:14.551712
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T16:03:08.281831
+Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,730000.0,2026-03-19T16:03:08.281831
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T16:03:47.899517
+Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,730000.0,2026-03-19T16:03:47.899517
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T16:24:26.531321
+Manual Entry,MaxRects Engine,1,SHEET-MANUAL,Plywood 18mm,730000.0,2026-03-19T16:24:26.531321
+batch_job_2.json,MaxRects Engine,0,S1,Small Board,690000.0,2026-03-19T16:25:30.084439
+batch_job_2.json,MaxRects Engine,0,S1,Small Board,690000.0,2026-03-19T16:26:52.182770
+Manual Entry,MaxRects Engine,0,SHEET-MANUAL,Plywood 18mm,1880000.0,2026-03-19T16:26:58.790154
+batch_job_2.json,Intelligent (MaxRects - Area Descending),0,S1,Small Board,690000.0,2026-03-19T16:27:05.958321
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T16:31:29.725762
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T16:31:29.725762
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T16:55:28.109841
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T16:55:28.109841
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,2340000.0,2026-03-19T16:59:43.051854
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-19T17:00:10.170071
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-19T17:00:10.170071
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T17:53:25.447284
+Manual Entry,Intelligent (MaxRects - Area Descending),1,SHEET-MANUAL,Plywood 18mm,1210000.0,2026-03-19T17:53:25.447284
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,305000.0,2026-03-19T17:53:36.090779
+Manual Entry,Intelligent (MaxRects - Area Descending),1,SHEET-MANUAL,Plywood 18mm,1210000.0,2026-03-19T17:53:36.090779
+comparison_demo.json,Intelligent (MaxRects - Area Descending),0,SHEET-DEMO,Plywood 18mm,416800.0,2026-03-20T09:56:28.278473
+comparison_demo.json,Intelligent (MaxRects - Area Descending),1,SHEET-DEMO,Plywood 18mm,1756800.0,2026-03-20T09:56:28.278473
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,2160000.0,2026-03-20T09:57:45.594474
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 18mm,2160000.0,2026-03-20T09:59:40.765601
+Manual Entry,Intelligent (MaxRects - Area Descending),0,SHEET-MANUAL,Plywood 10mm,1680000.0,2026-03-20T12:21:55.549384

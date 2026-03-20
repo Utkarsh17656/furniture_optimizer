@@ -22,20 +22,21 @@ def load_data(json_path: str) -> tuple[Optional[Sheet], List[Part], Optional[Man
             return None, [], None
             
         sheet = Sheet(
-            id=sheet_data['id'],
+            id=sheet_data.get('id', 'Sheet-1'),
             width=float(sheet_data['width']),
             height=float(sheet_data['height']),
             material=sheet_data.get('material', 'Standard')
         )
-        
         parts = []
         for p in data.get('parts', []):
-            parts.append(Part(
-                id=p['id'],
-                width=float(p['width']),
-                height=float(p['height']),
-                name=p.get('name', '')
-            ))
+            qty = p.get('quantity', 1)
+            for i in range(qty):
+                parts.append(Part(
+                    id=f"{p['id']}_{i+1}" if qty > 1 else p['id'],
+                    width=float(p['width']),
+                    height=float(p['height']),
+                    name=p.get('name', '')
+                ))
             
         constraints_data = data.get('constraints')
         constraints = None

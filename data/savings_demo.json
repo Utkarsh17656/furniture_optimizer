@@ -1,0 +1,106 @@
+{
+  "sheet": {
+    "id": "S1",
+    "width": 100,
+    "height": 100,
+    "material": "Test"
+  },
+  "parts": [
+    {
+      "id": "P0",
+      "width": 39,
+      "height": 53,
+      "name": "Part P0"
+    },
+    {
+      "id": "P1",
+      "width": 32,
+      "height": 61,
+      "name": "Part P1"
+    },
+    {
+      "id": "P2",
+      "width": 41,
+      "height": 23,
+      "name": "Part P2"
+    },
+    {
+      "id": "P3",
+      "width": 72,
+      "height": 72,
+      "name": "Part P3"
+    },
+    {
+      "id": "P4",
+      "width": 29,
+      "height": 33,
+      "name": "Part P4"
+    },
+    {
+      "id": "P5",
+      "width": 36,
+      "height": 60,
+      "name": "Part P5"
+    },
+    {
+      "id": "P6",
+      "width": 80,
+      "height": 77,
+      "name": "Part P6"
+    },
+    {
+      "id": "P7",
+      "width": 72,
+      "height": 46,
+      "name": "Part P7"
+    },
+    {
+      "id": "P8",
+      "width": 45,
+      "height": 60,
+      "name": "Part P8"
+    },
+    {
+      "id": "P9",
+      "width": 62,
+      "height": 62,
+      "name": "Part P9"
+    },
+    {
+      "id": "P10",
+      "width": 74,
+      "height": 31,
+      "name": "Part P10"
+    },
+    {
+      "id": "P11",
+      "width": 86,
+      "height": 82,
+      "name": "Part P11"
+    },
+    {
+      "id": "P12",
+      "width": 71,
+      "height": 30,
+      "name": "Part P12"
+    },
+    {
+      "id": "P13",
+      "width": 46,
+      "height": 51,
+      "name": "Part P13"
+    },
+    {
+      "id": "P14",
+      "width": 24,
+      "height": 45,
+      "name": "Part P14"
+    }
+  ],
+  "constraints": {
+    "kerf": 0,
+    "margin": 0,
+    "allow_rotation": true,
+    "cost_per_sheet": 2000
+  }
+}

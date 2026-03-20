@@ -32,6 +32,7 @@ def get_jobs():
 def optimize():
     """Runs optimization on a selected job."""
     data = request.json
+    cost_per_sheet = float(data.get('cost_per_sheet', 0.0))
     engine_name = data.get('engine', 'maxrects')
     
     sheet = None
@@ -63,10 +64,10 @@ def optimize():
         constraints_data = job_data.get('constraints')
         if constraints_data:
             file_constraints = ManufacturingConstraints(
-                kerf=float(constraints_data.get('kerf', 0.0)),
-                margin=float(constraints_data.get('margin', 0.0)),
+                kerf=float(constraints_data.get('kerf', 4.0)),
+                margin=float(constraints_data.get('margin', 10.0)),
                 allow_rotation=bool(constraints_data.get('allow_rotation', True)),
-                cost_per_sheet=float(constraints_data.get('cost_per_sheet', 0.0))
+                cost_per_sheet=cost_per_sheet
             )
 
     elif 'job_file' in data:
@@ -82,10 +83,10 @@ def optimize():
                 kerf=file_constraints.kerf,
                 margin=file_constraints.margin,
                 allow_rotation=file_constraints.allow_rotation,
-                cost_per_sheet=global_cost
+                cost_per_sheet=cost_per_sheet
             )
         else:
-            file_constraints = ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True, cost_per_sheet=global_cost)
+            file_constraints = ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True, cost_per_sheet=cost_per_sheet)
     
     else:
         return jsonify({"error": "No job data or job file provided"}), 400
@@ -180,53 +181,6 @@ def optimize():
         import traceback
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
-    
-    timestamp_str = datetime.now().isoformat()
-    waste_details = []
-    
-    with open(inventory_path, 'a', newline='') as csvfile:
-        fieldnames = ['job_file', 'algorithm', 'sheet_index', 'sheet_id', 'material', 'waste_area', 'timestamp']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        
-        if not file_has_content:
-            writer.writeheader()
-            
-        for i, res_sheet in enumerate(result.sheets):
-            if res_sheet.waste_area > 0:
-                row = {
-                    "job_file": job_filename,
-                    "algorithm": engine.name,
-                    "sheet_index": i,
-                    "sheet_id": res_sheet.sheet.id,
-                    "material": res_sheet.sheet.material,
-                    "waste_area": round(res_sheet.waste_area, 2),
-                    "timestamp": timestamp_str
-                }
-                writer.writerow(row)
-                waste_details.append(row)
-    
-    # Save visualization for frontend
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    viz_filename = f"viz_{timestamp}.png"
-    viz_path = os.path.join(OUTPUT_DIR, viz_filename)
-    
-    # Use Visualizer - need to make sure it closes the plot correctly
-    from src.utils.visualizer import Visualizer
-    viz = Visualizer()
-    viz.plot_result(result, constraints, save_path=viz_path)
-    
-    return jsonify({
-        "engine": engine.name,
-        "metrics": {
-            "sheets": len(result.sheets),
-            "efficiency": round(result.overall_efficiency, 2),
-            "wastage": round(result.wastage_percentage, 2),
-            "waste": round(result.total_waste_area, 2),
-            "runtime": round(result.runtime_seconds, 4)
-        },
-        "waste_details": waste_details,
-        "viz_url": f"/output/{viz_filename}"
-    })
 
 @app.route('/api/download_inventory', methods=['GET'])
 def download_inventory():

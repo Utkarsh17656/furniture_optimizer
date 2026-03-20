@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const jobSelect = document.getElementById('job-select');
-    const engineBtns = document.querySelectorAll('.engine-btn');
+    const engineBtns = document.querySelectorAll('.engine-btn[data-engine]');
     const runBtn = document.getElementById('run-btn');
     const vizImg = document.getElementById('viz-img');
     const placeholder = document.querySelector('.placeholder');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const runtimeDisplay = document.getElementById('runtime-display');
 
     // UI Input Mode
-    const inputMethodBtns = document.querySelectorAll('#input-method-toggle .engine-btn');
+    const inputMethodBtns = document.querySelectorAll('.engine-btn[data-method]');
     const jsonInputGroup = document.getElementById('json-input-group');
     const manualInputGroup = document.getElementById('manual-input-group');
     const addPartBtn = document.getElementById('add-part-btn');
@@ -197,23 +197,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Update Metrics
-            metricEfficiency.innerText = `${result.metrics.efficiency}%`;
-            metricWastage.innerText = `${result.metrics.wastage}%`;
-            metricSheets.innerText = result.metrics.sheets;
-            runtimeDisplay.innerText = `Runtime: ${result.metrics.runtime}s`;
+            metricEfficiency.innerText = `${(result.metrics.efficiency || 0).toFixed(2)}%`;
+            metricWastage.innerText = `${(result.metrics.wastage || 0).toFixed(2)}%`;
+            metricSheets.innerText = result.metrics.sheets || 0;
+            runtimeDisplay.innerText = `Runtime: ${(result.metrics.runtime || 0).toFixed(4)}s`;
             
             const metricMatCost = document.getElementById('metric-material-cost');
             const metricWasteCost = document.getElementById('metric-waste-cost');
             const metricSavings = document.getElementById('metric-baseline-savings');
             
-            if (metricMatCost && result.metrics.material_cost !== undefined) {
-                metricMatCost.innerText = `₹${result.metrics.material_cost.toFixed(2)}`;
+            if (metricMatCost) {
+                const val = (result.metrics && result.metrics.material_cost !== undefined) ? result.metrics.material_cost : 0;
+                metricMatCost.innerText = `₹${Number(val).toFixed(2)}`;
             }
-            if (metricWasteCost && result.metrics.waste_cost !== undefined) {
-                metricWasteCost.innerText = `₹${result.metrics.waste_cost.toFixed(2)}`;
+            if (metricWasteCost) {
+                const val = (result.metrics && result.metrics.waste_cost !== undefined) ? result.metrics.waste_cost : 0;
+                metricWasteCost.innerText = `₹${Number(val).toFixed(2)}`;
             }
-            if (metricSavings && result.metrics.baseline_savings !== undefined) {
-                metricSavings.innerText = `₹${result.metrics.baseline_savings.toFixed(2)}`;
+            if (metricSavings) {
+                const val = (result.metrics && result.metrics.baseline_savings !== undefined) ? result.metrics.baseline_savings : 0;
+                metricSavings.innerText = `₹${Number(val).toFixed(2)}`;
             }
 
             // Comparative Analysis Table
@@ -223,11 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.candidates_data && result.candidates_data.length > 0) {
                 compTableBody.innerHTML = result.candidates_data.map((c, i) => `
                     <tr style="${i === 0 ? 'background: rgba(34, 197, 94, 0.1); font-weight: 600;' : ''}">
-                        <td>${c.algorithm} ${i === 0 ? '<span class="alg-badge" style="background: var(--success); margin-left:8px;">BEST</span>' : ''}</td>
-                        <td>${c.sheets}</td>
-                        <td>${c.utilization.toFixed(2)}%</td>
-                        <td>${c.wastage.toFixed(2)}%</td>
-                        <td>₹${c.material_cost.toFixed(2)}</td>
+                        <td>${c.algorithm || 'Unknown'} ${i === 0 ? '<span class="alg-badge" style="background: var(--success); margin-left:8px;">BEST</span>' : ''}</td>
+                        <td>${c.sheets || 0}</td>
+                        <td>${(c.utilization || 0).toFixed(2)}%</td>
+                        <td>${(c.wastage || 0).toFixed(2)}%</td>
+                        <td>₹${(c.material_cost || 0).toFixed(2)}</td>
                     </tr>
                 `).join('');
                 compSection.style.display = 'block';
@@ -236,11 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 compSection.style.display = 'block';
                 compTableBody.innerHTML = `
                     <tr style="background: rgba(34, 197, 94, 0.1); font-weight: 600;">
-                        <td>${result.engine} <span class="alg-badge" style="background: var(--success); margin-left:8px;">SINGLE</span></td>
-                        <td>${result.metrics.sheets}</td>
-                        <td>${result.metrics.efficiency.toFixed(2)}%</td>
-                        <td>${result.metrics.wastage.toFixed(2)}%</td>
-                        <td>₹${result.metrics.material_cost ? result.metrics.material_cost.toFixed(2) : '0.00'}</td>
+                        <td>${result.engine || 'Unknown'} <span class="alg-badge" style="background: var(--success); margin-left:8px;">SINGLE</span></td>
+                        <td>${result.metrics.sheets || 0}</td>
+                        <td>${(result.metrics.efficiency || 0).toFixed(2)}%</td>
+                        <td>${(result.metrics.wastage || 0).toFixed(2)}%</td>
+                        <td>₹${result.metrics.material_cost !== undefined ? result.metrics.material_cost.toFixed(2) : '0.00'}</td>
                     </tr>
                 `;
             }
@@ -268,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${row.sheet_id} - [${row.sheet_index}]</td>
                         <td><span class="alg-badge">${row.algorithm}</span></td>
                         <td>${row.material}</td>
-                        <td style="color: var(--accent); font-weight: 600;">${row.waste_area.toFixed(2)} sq units</td>
+                        <td style="color: var(--accent); font-weight: 600;">${(row.waste_area || 0).toFixed(2)} sq units</td>
                         <td>${new Date(row.timestamp).toLocaleTimeString()}</td>
                     </tr>
                 `}).join('');

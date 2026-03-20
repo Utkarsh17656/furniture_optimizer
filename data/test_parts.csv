@@ -1,0 +1,9 @@
+Name,Width,Height,Quantity
+Side,600,400,2
+Panel,800,300,3
+Shelf,500,200,4
+Divider,300,150,5
+LongStrip,1200,100,2
+SmallBlock,100,100,10
+BigBoard,1800,600,1
+BackBox,1000,500,2

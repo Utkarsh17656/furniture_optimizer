@@ -6,8 +6,8 @@ URL = "http://127.0.0.1:5000/api/optimize"
 # Test 1: JSON File + Intelligent Engine + Cost
 payload1 = {
     "engine": "intelligent",
-    "job_file": "example_input.json",
-    "cost_per_sheet": 2500
+    "job_file": "complex_savings_demo.json",
+    "cost_per_sheet": 3500
 }
 
 print("Running Test 1: JSON File...")
