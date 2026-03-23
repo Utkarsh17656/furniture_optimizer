@@ -96,6 +96,7 @@
                         <div class="field" style="margin-top: 0.5rem;">
                             <label for="csv-upload" class="secondary-btn" style="display: inline-block; text-align: center; font-size: 0.8rem; padding: 0.5rem; cursor: pointer;">Upload CSV</label>
                             <input type="file" id="csv-upload" accept=".csv" style="display: none;">
+                            <div id="csv-error" style="color: #fb7185; font-size: 0.8rem; margin-top: 0.5rem; display: none;"></div>
                         </div>
                     </div>
                 </div>
@@ -141,10 +142,6 @@
                         <div class="metric-label">Waste Cost</div>
                         <div id="metric-waste-cost" class="metric-value">₹0.00</div>
                     </div>
-                    <div class="metric-card" style="flex: 1; padding: 1rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success); min-width: 150px;">
-                        <div class="metric-label">Estimated Savings</div>
-                        <div id="metric-baseline-savings" class="metric-value" style="color: var(--success);">₹0.00</div>
-                    </div>
                 </div>
                 <div class="table-container">
                     <table class="waste-table">
@@ -170,10 +167,12 @@
                     <table class="waste-table">
                         <thead>
                             <tr>
+                                <th>Sheet #</th>
                                 <th>Sheet ID</th>
-                                <th>Algorithm</th>
-                                <th>Material</th>
                                 <th>Waste Area</th>
+                                <th>Waste %</th>
+                                <th>Material Cost</th>
+                                <th>Waste Cost</th>
                                 <th>Timestamp</th>
                             </tr>
                         </thead>

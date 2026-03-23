@@ -81,34 +81,87 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Manual Entry Handlers
     addPartBtn.addEventListener('click', () => addPartRow());
 
-    // CSV Parsing
+    // CSV Parsing & Validation
     csvUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
+        const csvError = document.getElementById('csv-error');
+        if (!csvError) return;
+
+        csvError.style.display = 'none';
+        csvError.innerText = '';
+
         if (!file) return;
+
+        // 1. File type validation
+        if (!file.name.toLowerCase().endsWith('.csv')) {
+            csvError.innerText = "Please upload a valid CSV file.";
+            csvError.style.display = 'block';
+            csvUpload.value = '';
+            return;
+        }
 
         const reader = new FileReader();
         reader.onload = function(event) {
             const text = event.target.result;
             const rows = text.split('\n').map(r => r.trim()).filter(r => r);
             
-            // Assuming first row is header, skip it if it looks like one
-            let startIdx = 0;
-            if (rows[0].toLowerCase().includes('name') || rows[0].toLowerCase().includes('width')) {
-                startIdx = 1;
+            if (rows.length === 0) {
+                csvError.innerText = "The uploaded CSV file is empty.";
+                csvError.style.display = 'block';
+                return;
             }
 
-            for (let i = startIdx; i < rows.length; i++) {
-                const cols = rows[i].split(',').map(c => c.trim());
-                if (cols.length >= 3) {
-                    const name = cols[0];
-                    const w = parseInt(cols[1]) || 0;
-                    const h = parseInt(cols[2]) || 0;
-                    const qty = cols.length >= 4 ? (parseInt(cols[3]) || 1) : 1;
-                    if (w > 0 && h > 0) {
-                        addPartRow(name, w, h, qty);
-                    }
-                }
+            // 2. Header validation
+            const expectedHeaders = ["Name", "Width", "Height", "Quantity"];
+            const actualHeaders = rows[0].split(',').map(h => h.trim());
+            
+            const headersMatch = expectedHeaders.every((h, i) => 
+                actualHeaders[i] && actualHeaders[i].toLowerCase() === h.toLowerCase());
+
+            if (!headersMatch) {
+                csvError.innerText = "Please upload a valid CSV file with headers: Name, Width, Height, Quantity";
+                csvError.style.display = 'block';
+                csvUpload.value = '';
+                return;
             }
+
+            // Clear existing manual parts if user wants a clean slate? 
+            // The prompt says "Populate parts list table", implying adding to it.
+            // But usually validation should be for the whole file.
+
+            let addedCount = 0;
+            let errorRows = [];
+
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i].split(',').map(c => c.trim());
+                
+                // 3. Row data validation
+                if (cols.length < 4) {
+                    errorRows.push(i + 1);
+                    continue;
+                }
+
+                const name = cols[0];
+                const w = parseFloat(cols[1]);
+                const h = parseFloat(cols[2]);
+                const qty = parseInt(cols[3]);
+
+                if (isNaN(w) || isNaN(h) || isNaN(qty) || w <= 0 || h <= 0 || qty <= 0) {
+                    errorRows.push(i + 1);
+                    continue;
+                }
+
+                addPartRow(name, w, h, qty);
+                addedCount++;
+            }
+
+            if (errorRows.length > 0) {
+                csvError.innerText = `Imported ${addedCount} parts. Some rows (${errorRows.join(', ')}) were skipped due to invalid data.`;
+                csvError.style.display = 'block';
+            } else {
+                statusChip.innerText = `Successfully imported ${addedCount} parts from CSV.`;
+            }
+
             csvUpload.value = ''; // Reset
         };
         reader.readAsText(file);
@@ -204,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const metricMatCost = document.getElementById('metric-material-cost');
             const metricWasteCost = document.getElementById('metric-waste-cost');
-            const metricSavings = document.getElementById('metric-baseline-savings');
             
             if (metricMatCost) {
                 const val = (result.metrics && result.metrics.material_cost !== undefined) ? result.metrics.material_cost : 0;
@@ -213,10 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (metricWasteCost) {
                 const val = (result.metrics && result.metrics.waste_cost !== undefined) ? result.metrics.waste_cost : 0;
                 metricWasteCost.innerText = `₹${Number(val).toFixed(2)}`;
-            }
-            if (metricSavings) {
-                const val = (result.metrics && result.metrics.baseline_savings !== undefined) ? result.metrics.baseline_savings : 0;
-                metricSavings.innerText = `₹${Number(val).toFixed(2)}`;
             }
 
             // Comparative Analysis Table
@@ -268,10 +316,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     totalWaste += row.waste_area;
                     return `
                     <tr>
-                        <td>${row.sheet_id} - [${row.sheet_index}]</td>
-                        <td><span class="alg-badge">${row.algorithm}</span></td>
-                        <td>${row.material}</td>
-                        <td style="color: var(--accent); font-weight: 600;">${(row.waste_area || 0).toFixed(2)} sq units</td>
+                        <td>${row.sheet_number}</td>
+                        <td style="font-weight: 600;">${row.sheet_id}</td>
+                        <td style="color: var(--accent); font-weight: 600;">${(row.waste_area || 0).toFixed(2)} sq mm</td>
+                        <td>${(row.waste_percentage || 0).toFixed(2)}%</td>
+                        <td>₹${(row.material_cost || 0).toFixed(2)}</td>
+                        <td style="color: #fb7185; font-weight: 600;">₹${(row.waste_cost || 0).toFixed(2)}</td>
                         <td>${new Date(row.timestamp).toLocaleTimeString()}</td>
                     </tr>
                 `}).join('');

@@ -116,25 +116,30 @@ def optimize():
         waste_details = []
         
         with open(inventory_path, 'a', newline='') as csvfile:
-            fieldnames = ['job_file', 'algorithm', 'sheet_index', 'sheet_id', 'material', 'waste_area', 'timestamp']
+            fieldnames = ['job_file', 'sheet_number', 'sheet_id', 'waste_area', 'waste_percentage', 'material_cost', 'waste_cost', 'timestamp']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
             if not file_has_content:
                 writer.writeheader()
                 
             for i, res_sheet in enumerate(result.sheets):
-                if res_sheet.waste_area > 0:
-                    row = {
-                        "job_file": job_filename,
-                        "algorithm": engine.name,
-                        "sheet_index": i,
-                        "sheet_id": res_sheet.sheet.id,
-                        "material": res_sheet.sheet.material,
-                        "waste_area": round(res_sheet.waste_area, 2),
-                        "timestamp": timestamp_str
-                    }
-                    writer.writerow(row)
-                    waste_details.append(row)
+                sheet_area = res_sheet.sheet.width * res_sheet.sheet.height
+                waste_percent = (res_sheet.waste_area / sheet_area * 100) if sheet_area > 0 else 0
+                mat_cost = constraints.cost_per_sheet
+                waste_cost_val = (res_sheet.waste_area / sheet_area * mat_cost) if sheet_area > 0 else 0
+
+                row = {
+                    "job_file": job_filename,
+                    "sheet_number": i + 1,
+                    "sheet_id": res_sheet.sheet.id,
+                    "waste_area": round(res_sheet.waste_area, 2),
+                    "waste_percentage": round(waste_percent, 2),
+                    "material_cost": round(mat_cost, 2),
+                    "waste_cost": round(waste_cost_val, 2),
+                    "timestamp": timestamp_str
+                }
+                writer.writerow(row)
+                waste_details.append(row)
         
         # Save visualization for frontend
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -184,12 +189,74 @@ def optimize():
 
 @app.route('/api/download_inventory', methods=['GET'])
 def download_inventory():
-    """Allows downloading the CSV inventory file."""
+    """Allows downloading the CSV inventory file with a summary row."""
     inventory_path = os.path.join(DATA_DIR, 'inventory.csv')
-    if os.path.exists(inventory_path):
-        return send_file(inventory_path, as_attachment=True, download_name='inventory.csv')
-    else:
+    if not os.path.exists(inventory_path):
         return jsonify({"error": "Inventory file not found"}), 404
+
+    # Read existing data to calculate totals
+    rows = []
+    try:
+        with open(inventory_path, 'r', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            fieldnames = reader.fieldnames
+            for row in reader:
+                rows.append(row)
+    except Exception as e:
+        return jsonify({"error": f"Failed to read inventory: {str(e)}"}), 500
+
+    if not rows:
+        return send_file(inventory_path, as_attachment=True, download_name='inventory.csv')
+
+    # Calculate Totals
+    total_sheets = len(rows)
+    total_waste_area = sum(float(r['waste_area']) for r in rows)
+    total_material_cost = sum(float(r['material_cost']) for r in rows)
+    total_waste_cost = sum(float(r['waste_cost']) for r in rows)
+    avg_waste_percent = (total_waste_area / (sum(float(r['waste_area']) / (float(r['waste_percentage']) / 100) if float(r['waste_percentage']) > 0 else 0 for r in rows) or 1)) * 100 
+    
+    # Wait, avg_waste_% calculation above is complex because we don't store total_sheet_area.
+    # Actually, we can just average the waste_percentage column if we want "average waste per sheet".
+    # Or we can sum total_waste_area and divide by sum of total_sheet_areas.
+    # Since we don't have total_sheet_area in the CSV, I'll use the average of percentages or calculate it from waste_area / (waste_percent/100).
+    
+    # A cleaner way to get avg_waste_%:
+    # total_sheet_area_sum = sum(float(r['waste_area']) / (float(r['waste_percentage']) / 100) for r in rows if float(r['waste_percentage']) > 0)
+    # But some rows might have 0% waste.
+    
+    # Let's just use simple average of the percentages for "average waste %" as it's a common business metric.
+    avg_waste_percent = sum(float(r['waste_percentage']) for r in rows) / total_sheets
+
+    summary_row = {
+        "job_file": "TOTAL",
+        "sheet_number": "-",
+        "sheet_id": str(total_sheets),
+        "waste_area": round(total_waste_area, 2),
+        "waste_percentage": round(avg_waste_percent, 2),
+        "material_cost": round(total_material_cost, 2),
+        "waste_cost": round(total_waste_cost, 2),
+        "timestamp": "-"
+    }
+
+    # Create a temporary file or in-memory stream for the response
+    import io
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+    writer.writerow(summary_row)
+    
+    mem = io.BytesIO()
+    mem.write(output.getvalue().encode('utf-8'))
+    mem.seek(0)
+    output.close()
+
+    return send_file(
+        mem,
+        as_attachment=True,
+        download_name='inventory_report.csv',
+        mimetype='text/csv'
+    )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
