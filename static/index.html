@@ -39,6 +39,30 @@
                     <input type="number" id="cost-per-sheet" value="0" min="0" step="1">
                 </div>
 
+                <div class="sub-panel" style="margin-top: 1rem;">
+                    <h3>Manufacturing Constraints</h3>
+                    <div class="input-row">
+                        <div class="field half">
+                            <label for="kerf">Kerf (mm)</label>
+                            <input type="number" id="kerf" value="4" step="0.1" min="0">
+                        </div>
+                        <div class="field half">
+                            <label for="margin">Margin (mm)</label>
+                            <input type="number" id="margin" value="10" step="0.1" min="0">
+                        </div>
+                    </div>
+                    <div class="input-row" style="margin-top: 0.5rem;">
+                        <div class="field half">
+                            <label for="min-reusable-area" title="Minimum area to be considered reusable (default 0.5 sq ft)">Min Reusable Area (sq ft)</label>
+                            <input type="number" id="min-reusable-area" value="0.5" step="0.1" min="0">
+                        </div>
+                        <div class="field half">
+                            <label for="min-reusable-dim" title="Minimum dimension to be considered reusable">Min Reusable Dim (mm)</label>
+                            <input type="number" id="min-reusable-dim" value="100" step="1" min="0">
+                        </div>
+                    </div>
+                </div>
+
                 <div id="manual-input-group" style="display: none;">
                     <div class="sub-panel">
                         <h3>Sheet Details</h3>
@@ -58,19 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="sub-panel" style="margin-top: 1rem;">
-                        <h3>Constraints</h3>
-                        <div class="input-row">
-                            <div class="field half">
-                                <label for="kerf">Kerf (mm)</label>
-                                <input type="number" id="kerf" value="4" step="0.1" min="0">
-                            </div>
-                            <div class="field half">
-                                <label for="margin">Margin (mm)</label>
-                                <input type="number" id="margin" value="10" step="0.1" min="0">
-                            </div>
-                        </div>
-                    </div>
+
                     
                     <div class="sub-panel" style="margin-top: 1rem;">
                         <div class="viz-header" style="margin-bottom: 0.5rem;">
@@ -115,20 +127,28 @@
                 <button id="download-csv-btn" class="secondary-btn">Download Overall Inventory CSV</button>
             </section>
 
-            <section class="metrics-grid">
+            <section class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
                 <div class="metric-card">
                     <div class="metric-label">Utilization</div>
                     <div id="metric-efficiency" class="metric-value">0%</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label">Wastage</div>
-                    <div id="metric-wastage" class="metric-value wastage-high">0%</div>
-                </div>
-                <div class="metric-card">
                     <div class="metric-label">Sheets Used</div>
                     <div id="metric-sheets" class="metric-value">0</div>
                 </div>
-                <div id="status-chip" class="status-chip">Ready</div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Waste</div>
+                    <div id="metric-waste" class="metric-value">0 sq mm</div>
+                </div>
+                <div class="metric-card" style="border-left: 4px solid var(--success);">
+                    <div class="metric-label">Reusable Waste</div>
+                    <div id="metric-reusable" class="metric-value" style="color: var(--success);">0 sq mm</div>
+                </div>
+                <div class="metric-card" style="border-left: 4px solid #ef4444;">
+                    <div class="metric-label">Actual Loss (Scrap)</div>
+                    <div id="metric-scrap" class="metric-value" style="color: #ef4444;">0 sq mm</div>
+                </div>
+                <div id="status-chip" class="status-chip" style="grid-column: 1 / -1;">Ready</div>
             </section>
 
             <section id="comparative-analysis-section" class="panel waste-data-panel" style="display: none; margin-top: 1rem;">
@@ -138,9 +158,13 @@
                         <div class="metric-label">Material Cost</div>
                         <div id="metric-material-cost" class="metric-value">₹0.00</div>
                     </div>
+                    <div class="metric-card" style="flex: 1; padding: 1rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success); min-width: 150px;">
+                        <div class="metric-label">Reusable Value</div>
+                        <div id="metric-reusable-cost" class="metric-value" style="color: var(--success);">+ ₹0.00</div>
+                    </div>
                     <div class="metric-card" style="flex: 1; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; min-width: 150px;">
-                        <div class="metric-label">Waste Cost</div>
-                        <div id="metric-waste-cost" class="metric-value">₹0.00</div>
+                        <div class="metric-label">Loss Cost (Scrap)</div>
+                        <div id="metric-scrap-cost" class="metric-value" style="color: #ef4444;">- ₹0.00</div>
                     </div>
                 </div>
                 <div class="table-container">
@@ -169,11 +193,12 @@
                             <tr>
                                 <th>Sheet #</th>
                                 <th>Sheet ID</th>
-                                <th>Waste Area</th>
+                                <th>Total Waste</th>
+                                <th>Reusable Area</th>
+                                <th>Scrap Area</th>
                                 <th>Waste %</th>
                                 <th>Material Cost</th>
-                                <th>Waste Cost</th>
-                                <th>Timestamp</th>
+                                <th>Scrap Cost</th>
                             </tr>
                         </thead>
                         <tbody id="waste-table-body">

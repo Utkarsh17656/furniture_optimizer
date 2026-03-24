@@ -50,6 +50,8 @@ class ManufacturingConstraints:
     margin: float = 0.0        # Edge margin around the sheet
     allow_rotation: bool = True # Whether parts can be rotated 90 deg
     cost_per_sheet: float = 0.0 # Cost per material sheet
+    min_reusable_area: float = 46450.0 # Minimum area (sq mm) to be considered reusable (default ~0.5 sq ft)
+    min_reusable_dim: float = 100.0    # Minimum dimension (mm) to be considered reusable
 
 @dataclass
 class SheetResult:
@@ -58,12 +60,16 @@ class SheetResult:
     placed_parts: List[PlacedPart] = field(default_factory=list)
     used_area: float = 0.0
     waste_area: float = 0.0
+    reusable_waste_area: float = 0.0
+    scrap_waste_area: float = 0.0
     efficiency: float = 0.0
 
     def calculate_metrics(self):
         sheet_area = self.sheet.width * self.sheet.height
         self.used_area = sum(p.part.width * p.part.height for p in self.placed_parts)
         self.waste_area = sheet_area - self.used_area
+        # Reusable waste is calculated by the engine and stored in self.reusable_waste_area
+        self.scrap_waste_area = self.waste_area - self.reusable_waste_area
         self.efficiency = (self.used_area / sheet_area) * 100 if sheet_area > 0 else 0
 
     @property
@@ -89,6 +95,14 @@ class NestingResult:
     @property
     def total_waste_area(self) -> float:
         return sum(s.waste_area for s in self.sheets)
+        
+    @property
+    def total_reusable_waste_area(self) -> float:
+        return sum(s.reusable_waste_area for s in self.sheets)
+        
+    @property
+    def total_scrap_waste_area(self) -> float:
+        return sum(s.scrap_waste_area for s in self.sheets)
     
     @property
     def overall_efficiency(self) -> float:

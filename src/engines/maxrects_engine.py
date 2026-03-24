@@ -2,6 +2,7 @@ from typing import List, Optional, Tuple
 import time
 from src.engines.nesting_engine import NestingEngine
 from src.models.models import Part, Sheet, NestingResult, PlacedPart, SheetResult, ManufacturingConstraints
+from src.utils.waste_calculator import WasteCalculator
 
 class Rect:
     def __init__(self, x: float, y: float, width: float, height: float):
@@ -119,6 +120,15 @@ class MaxRectsEngine(NestingEngine):
                 continue
 
             current_sheet_res.placed_parts = placed_on_this_sheet
+            
+            # Calculate reusable waste from free_rects
+            reusable_area = WasteCalculator.calculate_reusable_waste(
+                free_rects, 
+                constraints.min_reusable_area, 
+                constraints.min_reusable_dim
+            )
+            current_sheet_res.reusable_waste_area = reusable_area
+            
             current_sheet_res.calculate_metrics()
             sheet_results.append(current_sheet_res)
 

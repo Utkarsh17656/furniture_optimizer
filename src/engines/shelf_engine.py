@@ -2,6 +2,14 @@ from typing import List, Optional
 import time
 from src.engines.nesting_engine import NestingEngine
 from src.models.models import Part, Sheet, NestingResult, PlacedPart, SheetResult, ManufacturingConstraints
+from src.utils.waste_calculator import WasteCalculator
+
+class Rect:
+    def __init__(self, x: float, y: float, width: float, height: float):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
 
 class ShelfNestingEngine(NestingEngine):
     """
@@ -33,6 +41,7 @@ class ShelfNestingEngine(NestingEngine):
         while remaining_parts:
             current_sheet_res = SheetResult(sheet=sheet_template)
             placed_on_this_sheet = []
+            free_rects = []
             
             # Shelf state
             current_x = margin
@@ -74,6 +83,11 @@ class ShelfNestingEngine(NestingEngine):
                         # Try to start new shelf
                         new_shelf_y = current_y + current_shelf_height + (kerf if current_shelf_height > 0 else 0)
                         if new_shelf_y + h <= margin + eff_height:
+                            # Record remaining space in the old shelf as a free rect
+                            remaining_w = (margin + eff_width) - current_x
+                            if remaining_w > 0 and current_shelf_height > 0:
+                                free_rects.append(Rect(current_x, current_y, remaining_w, current_shelf_height))
+                                
                             # Start new shelf
                             current_y = new_shelf_y
                             current_x = margin
@@ -86,7 +100,26 @@ class ShelfNestingEngine(NestingEngine):
                 if not placed:
                     still_to_process.append(part)
 
+            # Record remaining space in the final shelf
+            remaining_w = (margin + eff_width) - current_x
+            if remaining_w > 0 and current_shelf_height > 0:
+                free_rects.append(Rect(current_x, current_y, remaining_w, current_shelf_height))
+                
+            # Record remaining space above the final shelf
+            final_y = current_y + current_shelf_height
+            remaining_h = (margin + eff_height) - final_y
+            if remaining_h > 0:
+                free_rects.append(Rect(margin, final_y, eff_width, remaining_h))
+
             current_sheet_res.placed_parts = placed_on_this_sheet
+            
+            # Calculate reusable waste explicitly for shelf engine
+            current_sheet_res.reusable_waste_area = WasteCalculator.calculate_reusable_waste(
+                free_rects,
+                constraints.min_reusable_area,
+                constraints.min_reusable_dim
+            )
+            
             current_sheet_res.calculate_metrics()
             sheet_results.append(current_sheet_res)
             

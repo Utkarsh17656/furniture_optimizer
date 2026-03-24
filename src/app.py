@@ -67,7 +67,9 @@ def optimize():
                 kerf=float(constraints_data.get('kerf', 4.0)),
                 margin=float(constraints_data.get('margin', 10.0)),
                 allow_rotation=bool(constraints_data.get('allow_rotation', True)),
-                cost_per_sheet=cost_per_sheet
+                cost_per_sheet=cost_per_sheet,
+                min_reusable_area=float(constraints_data.get('min_reusable_area', 46450.0)),
+                min_reusable_dim=float(constraints_data.get('min_reusable_dim', 100.0))
             )
 
     elif 'job_file' in data:
@@ -76,17 +78,25 @@ def optimize():
         input_path = os.path.join(DATA_DIR, job_filename)
         sheet, parts, file_constraints = load_data(input_path)
         
-        # Merge global cost if provided
-        global_cost = float(data.get('cost_per_sheet', 0.0))
+        # Merge global constraints if provided in the root payload
         if file_constraints:
             file_constraints = ManufacturingConstraints(
-                kerf=file_constraints.kerf,
-                margin=file_constraints.margin,
+                kerf=float(data.get('kerf', file_constraints.kerf)),
+                margin=float(data.get('margin', file_constraints.margin)),
                 allow_rotation=file_constraints.allow_rotation,
-                cost_per_sheet=cost_per_sheet
+                cost_per_sheet=cost_per_sheet,
+                min_reusable_area=float(data.get('min_reusable_area', 46450.0)),
+                min_reusable_dim=float(data.get('min_reusable_dim', 100.0))
             )
         else:
-            file_constraints = ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True, cost_per_sheet=cost_per_sheet)
+            file_constraints = ManufacturingConstraints(
+                kerf=float(data.get('kerf', 4.0)), 
+                margin=float(data.get('margin', 10.0)), 
+                allow_rotation=True, 
+                cost_per_sheet=cost_per_sheet,
+                min_reusable_area=float(data.get('min_reusable_area', 46450.0)),
+                min_reusable_dim=float(data.get('min_reusable_dim', 100.0))
+            )
     
     else:
         return jsonify({"error": "No job data or job file provided"}), 400
@@ -116,7 +126,7 @@ def optimize():
         waste_details = []
         
         with open(inventory_path, 'a', newline='') as csvfile:
-            fieldnames = ['job_file', 'sheet_number', 'sheet_id', 'waste_area', 'waste_percentage', 'material_cost', 'waste_cost', 'timestamp']
+            fieldnames = ['job_file', 'sheet_number', 'sheet_id', 'waste_area', 'reusable_waste_area', 'scrap_waste_area', 'waste_percentage', 'material_cost', 'waste_cost', 'reusable_waste_cost', 'scrap_waste_cost', 'timestamp']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
             if not file_has_content:
@@ -127,15 +137,21 @@ def optimize():
                 waste_percent = (res_sheet.waste_area / sheet_area * 100) if sheet_area > 0 else 0
                 mat_cost = constraints.cost_per_sheet
                 waste_cost_val = (res_sheet.waste_area / sheet_area * mat_cost) if sheet_area > 0 else 0
+                reusable_waste_cost_val = (res_sheet.reusable_waste_area / sheet_area * mat_cost) if sheet_area > 0 else 0
+                scrap_waste_cost_val = (res_sheet.scrap_waste_area / sheet_area * mat_cost) if sheet_area > 0 else 0
 
                 row = {
                     "job_file": job_filename,
                     "sheet_number": i + 1,
                     "sheet_id": res_sheet.sheet.id,
                     "waste_area": round(res_sheet.waste_area, 2),
+                    "reusable_waste_area": round(res_sheet.reusable_waste_area, 2),
+                    "scrap_waste_area": round(res_sheet.scrap_waste_area, 2),
                     "waste_percentage": round(waste_percent, 2),
                     "material_cost": round(mat_cost, 2),
                     "waste_cost": round(waste_cost_val, 2),
+                    "reusable_waste_cost": round(reusable_waste_cost_val, 2),
+                    "scrap_waste_cost": round(scrap_waste_cost_val, 2),
                     "timestamp": timestamp_str
                 }
                 writer.writerow(row)
@@ -173,9 +189,13 @@ def optimize():
                 "efficiency": round(result.overall_efficiency, 2),
                 "wastage": round(result.wastage_percentage, 2),
                 "waste": round(result.total_waste_area, 2),
+                "reusable_waste": round(result.total_reusable_waste_area, 2),
+                "scrap_waste": round(result.total_scrap_waste_area, 2),
                 "runtime": round(result.runtime_seconds, 4),
                 "material_cost": round(total_material_cost, 2),
                 "waste_cost": round(waste_cost, 2),
+                "reusable_waste_cost": sum(round((s.reusable_waste_area / (s.sheet.width * s.sheet.height) * constraints.cost_per_sheet) if (s.sheet.width * s.sheet.height)>0 else 0, 2) for s in result.sheets),
+                "scrap_waste_cost": sum(round((s.scrap_waste_area / (s.sheet.width * s.sheet.height) * constraints.cost_per_sheet) if (s.sheet.width * s.sheet.height)>0 else 0, 2) for s in result.sheets),
                 "baseline_savings": round(getattr(result, 'baseline_savings', 0.0), 2)
             },
             "candidates_data": getattr(result, 'candidates_data', []),
@@ -209,32 +229,36 @@ def download_inventory():
         return send_file(inventory_path, as_attachment=True, download_name='inventory.csv')
 
     # Calculate Totals
+    def sfloat(val):
+        try:
+            return float(val) if val else 0.0
+        except (ValueError, TypeError):
+            return 0.0
+
     total_sheets = len(rows)
-    total_waste_area = sum(float(r['waste_area']) for r in rows)
-    total_material_cost = sum(float(r['material_cost']) for r in rows)
-    total_waste_cost = sum(float(r['waste_cost']) for r in rows)
-    avg_waste_percent = (total_waste_area / (sum(float(r['waste_area']) / (float(r['waste_percentage']) / 100) if float(r['waste_percentage']) > 0 else 0 for r in rows) or 1)) * 100 
+    total_waste_area = sum(sfloat(r.get('waste_area')) for r in rows)
+    total_reusable_area = sum(sfloat(r.get('reusable_waste_area')) for r in rows)
+    total_scrap_area = sum(sfloat(r.get('scrap_waste_area')) for r in rows)
+    total_material_cost = sum(sfloat(r.get('material_cost')) for r in rows)
+    total_waste_cost = sum(sfloat(r.get('waste_cost')) for r in rows)
+    total_reusable_cost = sum(sfloat(r.get('reusable_waste_cost')) for r in rows)
+    total_scrap_cost = sum(sfloat(r.get('scrap_waste_cost')) for r in rows)
     
-    # Wait, avg_waste_% calculation above is complex because we don't store total_sheet_area.
-    # Actually, we can just average the waste_percentage column if we want "average waste per sheet".
-    # Or we can sum total_waste_area and divide by sum of total_sheet_areas.
-    # Since we don't have total_sheet_area in the CSV, I'll use the average of percentages or calculate it from waste_area / (waste_percent/100).
-    
-    # A cleaner way to get avg_waste_%:
-    # total_sheet_area_sum = sum(float(r['waste_area']) / (float(r['waste_percentage']) / 100) for r in rows if float(r['waste_percentage']) > 0)
-    # But some rows might have 0% waste.
-    
-    # Let's just use simple average of the percentages for "average waste %" as it's a common business metric.
-    avg_waste_percent = sum(float(r['waste_percentage']) for r in rows) / total_sheets
+    # Simple average of the percentages for "average waste %"
+    avg_waste_percent = sum(sfloat(r.get('waste_percentage')) for r in rows) / total_sheets if total_sheets > 0 else 0
 
     summary_row = {
         "job_file": "TOTAL",
         "sheet_number": "-",
         "sheet_id": str(total_sheets),
         "waste_area": round(total_waste_area, 2),
+        "reusable_waste_area": round(total_reusable_area, 2),
+        "scrap_waste_area": round(total_scrap_area, 2),
         "waste_percentage": round(avg_waste_percent, 2),
         "material_cost": round(total_material_cost, 2),
         "waste_cost": round(total_waste_cost, 2),
+        "reusable_waste_cost": round(total_reusable_cost, 2),
+        "scrap_waste_cost": round(total_scrap_cost, 2),
         "timestamp": "-"
     }
 

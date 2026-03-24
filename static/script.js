@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusChip = document.getElementById('status-chip');
 
     const metricEfficiency = document.getElementById('metric-efficiency');
-    const metricWastage = document.getElementById('metric-wastage');
+    const metricWaste = document.getElementById('metric-waste');
+    const metricReusable = document.getElementById('metric-reusable');
+    const metricScrap = document.getElementById('metric-scrap');
     const metricSheets = document.getElementById('metric-sheets');
     const runtimeDisplay = document.getElementById('runtime-display');
 
@@ -171,6 +173,18 @@ document.addEventListener('DOMContentLoaded', () => {
     runBtn.addEventListener('click', async () => {
         let payload = { engine: selectedEngine };
         payload.cost_per_sheet = parseFloat(document.getElementById('cost-per-sheet').value) || 0;
+        
+        let min_area = document.getElementById('min-reusable-area');
+        let min_dim = document.getElementById('min-reusable-dim');
+        let kerf_input = document.getElementById('kerf');
+        let margin_input = document.getElementById('margin');
+
+        let parsed_area = min_area ? parseFloat(min_area.value) : NaN;
+        payload.min_reusable_area = !isNaN(parsed_area) ? parsed_area * 92903 : 46450;
+        payload.min_reusable_dim = min_dim ? (parseFloat(min_dim.value) || 100) : 100;
+        payload.kerf = kerf_input ? (parseFloat(kerf_input.value) || 0) : 4.0;
+        payload.margin = margin_input ? (parseFloat(margin_input.value) || 0) : 10.0;
+
 
         if (inputMethod === 'json') {
             const jobFile = jobSelect.value;
@@ -184,8 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const sw = parseFloat(document.getElementById('sheet-width').value) || 0;
             const sh = parseFloat(document.getElementById('sheet-height').value) || 0;
             const mat = document.getElementById('sheet-material').value;
-            const kerf = parseFloat(document.getElementById('kerf').value) || 0;
-            const margin = parseFloat(document.getElementById('margin').value) || 0;
 
             if (sw <= 0 || sh <= 0) {
                 alert("Invalid sheet dimensions.");
@@ -227,7 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
             payload.job_data = {
                 sheet: { id: "SHEET-MANUAL", width: sw, height: sh, material: mat },
                 parts: parts,
-                constraints: { kerf: kerf, margin: margin, allow_rotation: true }
+                constraints: { 
+                    kerf: payload.kerf, 
+                    margin: payload.margin, 
+                    allow_rotation: true,
+                    min_reusable_area: payload.min_reusable_area,
+                    min_reusable_dim: payload.min_reusable_dim
+                }
             };
         }
 
@@ -251,20 +269,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update Metrics
             metricEfficiency.innerText = `${(result.metrics.efficiency || 0).toFixed(2)}%`;
-            metricWastage.innerText = `${(result.metrics.wastage || 0).toFixed(2)}%`;
+            if (metricWaste) metricWaste.innerText = `${(result.metrics.waste || 0).toFixed(2)} sq mm`;
+            if (metricReusable) metricReusable.innerText = `${(result.metrics.reusable_waste || 0).toFixed(2)} sq mm`;
+            if (metricScrap) metricScrap.innerText = `${(result.metrics.scrap_waste || 0).toFixed(2)} sq mm`;
             metricSheets.innerText = result.metrics.sheets || 0;
             runtimeDisplay.innerText = `Runtime: ${(result.metrics.runtime || 0).toFixed(4)}s`;
             
             const metricMatCost = document.getElementById('metric-material-cost');
-            const metricWasteCost = document.getElementById('metric-waste-cost');
+            const metricReusableCost = document.getElementById('metric-reusable-cost');
+            const metricScrapCost = document.getElementById('metric-scrap-cost');
             
             if (metricMatCost) {
                 const val = (result.metrics && result.metrics.material_cost !== undefined) ? result.metrics.material_cost : 0;
                 metricMatCost.innerText = `₹${Number(val).toFixed(2)}`;
             }
-            if (metricWasteCost) {
-                const val = (result.metrics && result.metrics.waste_cost !== undefined) ? result.metrics.waste_cost : 0;
-                metricWasteCost.innerText = `₹${Number(val).toFixed(2)}`;
+            if (metricReusableCost) {
+                const val = (result.metrics && result.metrics.reusable_waste_cost !== undefined) ? result.metrics.reusable_waste_cost : 0;
+                metricReusableCost.innerText = `+ ₹${Number(val).toFixed(2)}`;
+            }
+            if (metricScrapCost) {
+                const val = (result.metrics && result.metrics.scrap_waste_cost !== undefined) ? result.metrics.scrap_waste_cost : 0;
+                metricScrapCost.innerText = `- ₹${Number(val).toFixed(2)}`;
             }
 
             // Comparative Analysis Table
@@ -296,42 +321,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
 
-            // Color coding for wastage
-            if (result.metrics.wastage > 25) {
-                metricWastage.classList.add('wastage-high');
-                metricWastage.classList.remove('wastage-low');
-            } else {
-                metricWastage.classList.add('wastage-low');
-                metricWastage.classList.remove('wastage-high');
-            }
-
             // Handle Waste Data Table
             const wasteSection = document.getElementById('waste-data-section');
             const wasteTableBody = document.getElementById('waste-table-body');
             const wasteTableFoot = document.getElementById('waste-table-foot');
             
             if (result.waste_details && result.waste_details.length > 0) {
-                let totalWaste = 0;
+                let totalReusabe = 0;
+                let totalScrap = 0;
                 wasteTableBody.innerHTML = result.waste_details.map(row => {
-                    totalWaste += row.waste_area;
+                    totalReusabe += (row.reusable_waste_area || 0);
+                    totalScrap += (row.scrap_waste_area || 0);
                     return `
                     <tr>
                         <td>${row.sheet_number}</td>
                         <td style="font-weight: 600;">${row.sheet_id}</td>
-                        <td style="color: var(--accent); font-weight: 600;">${(row.waste_area || 0).toFixed(2)} sq mm</td>
+                        <td style="color: var(--accent); font-weight: 600;">${(row.waste_area || 0).toFixed(2)} </td>
+                        <td style="color: var(--success);">${(row.reusable_waste_area || 0).toFixed(2)}</td>
+                        <td style="color: #fb7185;">${(row.scrap_waste_area || 0).toFixed(2)}</td>
                         <td>${(row.waste_percentage || 0).toFixed(2)}%</td>
                         <td>₹${(row.material_cost || 0).toFixed(2)}</td>
-                        <td style="color: #fb7185; font-weight: 600;">₹${(row.waste_cost || 0).toFixed(2)}</td>
-                        <td>${new Date(row.timestamp).toLocaleTimeString()}</td>
+                        <td style="color: #fb7185; font-weight: 600;">₹${(row.scrap_waste_cost || 0).toFixed(2)}</td>
                     </tr>
                 `}).join('');
                 
                 if (wasteTableFoot) {
                     wasteTableFoot.innerHTML = `
                         <tr style="background: rgba(15, 23, 42, 0.5);">
-                            <td colspan="3" style="text-align: right; font-weight: 700; text-transform: uppercase;">Total Waste Area:</td>
-                            <td style="color: #fb7185; font-weight: 700; font-size: 1.1em;">${totalWaste.toFixed(2)} sq units</td>
-                            <td></td>
+                            <td colspan="3" style="text-align: right; font-weight: 700; text-transform: uppercase;">Totals:</td>
+                            <td style="color: var(--success); font-weight: 700; font-size: 1.1em;">${totalReusabe.toFixed(2)}</td>
+                            <td style="color: #fb7185; font-weight: 700; font-size: 1.1em;">${totalScrap.toFixed(2)}</td>
+                            <td colspan="3"></td>
                         </tr>
                     `;
                 }
