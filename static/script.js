@@ -252,6 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
         runBtn.disabled = true;
         runBtn.innerText = "Optimizing...";
         statusChip.innerText = `Running ${selectedEngine.toUpperCase()} engine...`;
+        
+        const fulfillmentChip = document.getElementById('fulfillment-chip');
+        if (fulfillmentChip) fulfillmentChip.style.display = 'none';
 
         try {
             const response = await fetch('/api/optimize', {
@@ -274,6 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (metricScrap) metricScrap.innerText = `${(result.metrics.scrap_waste || 0).toFixed(2)} sq mm`;
             metricSheets.innerText = result.metrics.sheets || 0;
             runtimeDisplay.innerText = `Runtime: ${(result.metrics.runtime || 0).toFixed(4)}s`;
+            
+            if (fulfillmentChip && result.parts_fulfilled_count > 0) {
+                fulfillmentChip.innerText = `${result.parts_fulfilled_count} part(s) fulfilled using reusable material`;
+                fulfillmentChip.style.display = 'block';
+            }
             
             const metricMatCost = document.getElementById('metric-material-cost');
             const metricReusableCost = document.getElementById('metric-reusable-cost');
@@ -362,9 +370,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Update Visualization
-            vizImg.src = result.viz_url + '?t=' + new Date().getTime(); // Prevent caching
-            vizImg.style.display = 'block';
-            placeholder.style.display = 'none';
+            if (result.viz_url) {
+                vizImg.src = result.viz_url + '?t=' + new Date().getTime(); // Prevent caching
+                vizImg.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                vizImg.style.display = 'none';
+                placeholder.style.display = 'block';
+                placeholder.innerText = 'All parts fulfilled by reusable scrap. No visualization generated.';
+            }
 
             statusChip.innerText = `Optimization Complete: ${result.engine} engine used.`;
 

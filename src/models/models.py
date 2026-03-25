@@ -62,6 +62,7 @@ class SheetResult:
     waste_area: float = 0.0
     reusable_waste_area: float = 0.0
     scrap_waste_area: float = 0.0
+    reusable_scraps: List[Dict] = field(default_factory=list)
     efficiency: float = 0.0
 
     def calculate_metrics(self):

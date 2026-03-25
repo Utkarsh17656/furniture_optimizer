@@ -129,6 +129,21 @@ class MaxRectsEngine(NestingEngine):
             )
             current_sheet_res.reusable_waste_area = reusable_area
             
+            # Extract discrete non-overlapping reusable scraps for tracking (greedy approach)
+            valid_rects = [r for r in free_rects if r.width * r.height >= constraints.min_reusable_area and min(r.width, r.height) >= constraints.min_reusable_dim]
+            valid_rects.sort(key=lambda r: r.width * r.height, reverse=True)
+            selected_scraps = []
+            for r in valid_rects:
+                if not any(r.intersects(s) for s in selected_scraps):
+                    selected_scraps.append(r)
+            
+            for s in selected_scraps:
+                current_sheet_res.reusable_scraps.append({
+                    "width": round(s.width, 2),
+                    "height": round(s.height, 2),
+                    "area": round(s.width * s.height, 2)
+                })
+            
             current_sheet_res.calculate_metrics()
             sheet_results.append(current_sheet_res)
 

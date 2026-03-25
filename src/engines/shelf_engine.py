@@ -120,6 +120,15 @@ class ShelfNestingEngine(NestingEngine):
                 constraints.min_reusable_dim
             )
             
+            # Shelf engine produces non-overlapping free rects, so we can just filter them directly
+            for r in free_rects:
+                if r.width * r.height >= constraints.min_reusable_area and min(r.width, r.height) >= constraints.min_reusable_dim:
+                    current_sheet_res.reusable_scraps.append({
+                        "width": round(r.width, 2),
+                        "height": round(r.height, 2),
+                        "area": round(r.width * r.height, 2)
+                    })
+            
             current_sheet_res.calculate_metrics()
             sheet_results.append(current_sheet_res)
             

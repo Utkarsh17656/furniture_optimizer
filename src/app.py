@@ -106,6 +106,72 @@ def optimize():
 
     constraints = file_constraints if file_constraints else ManufacturingConstraints(kerf=4.0, margin=10.0, allow_rotation=True)
 
+    import uuid
+    # --- Reusable Scrap Processing ---
+    inventory_csv_path = os.path.join(DATA_DIR, 'reusable_inventory.csv')
+    reusable_scraps = []
+    
+    # 1. Load existing reusable inventory
+    if os.path.exists(inventory_csv_path):
+        with open(inventory_csv_path, 'r', newline='') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    reusable_scraps.append({
+                        "id": row.get("id"),
+                        "width": float(row.get("width", 0)),
+                        "height": float(row.get("height", 0)),
+                        "area": float(row.get("area", 0)),
+                        "source_job": row.get("source_job"),
+                        "timestamp": row.get("timestamp"),
+                        "used": False
+                    })
+                except Exception:
+                    pass
+
+    # 2. Try to fulfill parts from scrap (greedy, no rotation)
+    parts_fulfilled_from_scrap = 0
+    remaining_parts = []
+    for p in parts:
+        matched = False
+        for s in reusable_scraps:
+            if not s["used"] and s["width"] >= p.width and s["height"] >= p.height:
+                s["used"] = True
+                matched = True
+                parts_fulfilled_from_scrap += 1
+                break
+        if not matched:
+            remaining_parts.append(p)
+            
+    # 3. Write back unused scraps
+    with open(inventory_csv_path, 'w', newline='') as f:
+        fieldnames = ['id', 'width', 'height', 'area', 'source_job', 'timestamp']
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for s in reusable_scraps:
+            if not s["used"]:
+                writer.writerow({k: s[k] for k in fieldnames})
+                
+    # Update parts list for engine
+    parts = remaining_parts
+    
+    # If all parts were fulfilled by scrap, we can skip engine execution
+    if not parts:
+        return jsonify({
+            "engine": "Scrap Reuse",
+            "metrics": {
+                "sheets": 0, "efficiency": 100.0, "wastage": 0.0,
+                "waste": 0.0, "reusable_waste": 0.0, "scrap_waste": 0.0,
+                "runtime": 0.0, "material_cost": 0.0, "waste_cost": 0.0,
+                "reusable_waste_cost": 0.0, "scrap_waste_cost": 0.0,
+                "baseline_savings": 0.0
+            },
+            "parts_fulfilled_count": parts_fulfilled_from_scrap,
+            "candidates_data": [],
+            "waste_details": [],
+            "viz_url": ""
+        })
+
     try:
         if engine_name.lower() == 'intelligent':
             engine = IntelligentEngine()
@@ -169,6 +235,24 @@ def optimize():
         viz.plot_result(result, constraints, save_path=viz_path)
         print("Visualization generated.")
         
+        # Save newly generated reusable scraps
+        with open(inventory_csv_path, 'a', newline='') as f:
+            fieldnames = ['id', 'width', 'height', 'area', 'source_job', 'timestamp']
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            # If we just created it above, it will have a header unless it was totally empty. 
+            # But the 'w' block above always writes a header. So 'a' is safe to just append rows.
+            for s in result.sheets:
+                for scrap in s.reusable_scraps:
+                    scrap_id = f"SCRAP-{uuid.uuid4().hex[:8].upper()}"
+                    writer.writerow({
+                        "id": scrap_id,
+                        "width": scrap["width"],
+                        "height": scrap["height"],
+                        "area": scrap["area"],
+                        "source_job": job_filename,
+                        "timestamp": timestamp_str
+                    })
+        
         # Calculate total cost if missing for base results
         total_material_cost, waste_cost = 0.0, 0.0
         if isinstance(engine, IntelligentEngine):
@@ -200,7 +284,8 @@ def optimize():
             },
             "candidates_data": getattr(result, 'candidates_data', []),
             "waste_details": waste_details,
-            "viz_url": f"/output/{viz_filename}"
+            "viz_url": f"/output/{viz_filename}",
+            "parts_fulfilled_count": parts_fulfilled_from_scrap
         })
     except Exception as e:
         import traceback
