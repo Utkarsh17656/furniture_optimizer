@@ -20,6 +20,14 @@
             <section class="controls panel">
                 <h2>Control Panel</h2>
                 <div class="field">
+                    <label>Shape Mode</label>
+                    <select id="shape-mode-select" class="engine-select">
+                        <option value="rect-only" selected>Only Rectangles & Squares (default)</option>
+                        <option value="shapes">Rectangles + Circles + Triangles</option>
+                    </select>
+                </div>
+
+                <div class="field">
                     <label>Input Method</label>
                     <div class="engine-toggle" id="input-method-toggle">
                         <button class="engine-btn active" data-method="json">JSON File</button>
@@ -61,6 +69,10 @@
                             <input type="number" id="min-reusable-dim" value="100" step="1" min="0">
                         </div>
                     </div>
+                    <div class="field" style="margin-top: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="show-scrap-labels" checked style="width: auto;">
+                        <label for="show-scrap-labels" style="margin-bottom: 0; font-size: 0.9rem;">Show Scrap Detail Labels in Visualizer</label>
+                    </div>
                 </div>
 
                 <div id="manual-input-group" style="display: none;">
@@ -93,9 +105,10 @@
                             <table class="parts-input-table">
                                 <thead>
                                     <tr>
+                                        <th class="shape-col" style="display: none;">Type</th>
                                         <th>Name</th>
-                                        <th>W</th>
-                                        <th>H</th>
+                                        <th id="dim1-header">W</th>
+                                        <th id="dim2-header">H</th>
                                         <th>Qty</th>
                                         <th></th>
                                     </tr>
@@ -124,7 +137,10 @@
                 </div>
                 <button id="run-btn" class="primary-btn">Run Optimizer</button>
                 <div class="spacer-sm"></div>
-                <button id="download-csv-btn" class="secondary-btn">Download Overall Inventory CSV</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="download-csv-btn" class="secondary-btn" style="flex: 1;">Overall Inventory CSV</button>
+                    <button id="download-labels-btn" class="secondary-btn" style="flex: 1; display: none;">Download Labels CSV</button>
+                </div>
             </section>
 
             <section class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">

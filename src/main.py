@@ -30,12 +30,41 @@ def load_data(json_path: str) -> tuple[Optional[Sheet], List[Part], Optional[Man
         parts = []
         for p in data.get('parts', []):
             qty = p.get('quantity', 1)
+            meta = p.get('metadata', {})
+            shape = meta.get('shape', 'RECT').upper()
+            w = p.get('width', 0)
+            h = p.get('height', 0)
+
+            # Auto-infer width and height from metadata if omitted
+            if shape == 'CIRCLE':
+                if 'radius' in meta and not w:
+                    w = h = float(meta['radius']) * 2
+                elif 'diameter' in meta and not w:
+                    w = h = float(meta['diameter'])
+            elif shape in ['TRIANGLE', 'RIGHT_TRIANGLE', 'ISOSCELES_TRIANGLE', 'SCALENE_TRIANGLE']:
+                b = meta.get('breadth', meta.get('base'))
+                if b is not None and not w:
+                    w = float(b)
+                if 'height' in meta and not h:
+                    h = float(meta['height'])
+            elif shape == 'SEMI_CIRCLE':
+                if 'diameter' in meta and not w:
+                    w = float(meta['diameter'])
+                    h = w / 2
+                elif 'radius' in meta and not w:
+                    w = float(meta['radius']) * 2
+                    h = float(meta['radius'])
+            elif shape == 'QUARTER_CIRCLE':
+                if 'radius' in meta and not w:
+                    w = h = float(meta['radius'])
+
             for i in range(qty):
                 parts.append(Part(
                     id=f"{p['id']}_{i+1}" if qty > 1 else p['id'],
-                    width=float(p['width']),
-                    height=float(p['height']),
-                    name=p.get('name', '')
+                    width=float(w),
+                    height=float(h),
+                    name=p.get('name', ''),
+                    metadata=meta
                 ))
             
         constraints_data = data.get('constraints')
@@ -44,7 +73,10 @@ def load_data(json_path: str) -> tuple[Optional[Sheet], List[Part], Optional[Man
             constraints = ManufacturingConstraints(
                 kerf=float(constraints_data.get('kerf', 0.0)),
                 margin=float(constraints_data.get('margin', 0.0)),
-                allow_rotation=bool(constraints_data.get('allow_rotation', True))
+                allow_rotation=bool(constraints_data.get('allow_rotation', True)),
+                cost_per_sheet=float(constraints_data.get('cost_per_sheet', 0.0)),
+                min_reusable_area=float(constraints_data.get('min_reusable_area', 46450.0)),
+                min_reusable_dim=float(constraints_data.get('min_reusable_dim', 100.0))
             )
             
         return sheet, parts, constraints

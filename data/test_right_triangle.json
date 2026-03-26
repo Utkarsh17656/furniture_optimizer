@@ -1,0 +1,38 @@
+{
+    "job_id": "RIGHT-TRIANGLE-TEST",
+    "sheet": {
+        "id": "S1",
+        "width": 1200,
+        "height": 1200,
+        "material": "Small Board"
+    },
+    "constraints": {
+        "kerf": 2.0,
+        "margin": 5.0,
+        "allow_rotation": true,
+        "min_reusable_area": 10000,
+        "min_reusable_dim": 50
+    },
+    "parts": [
+        {
+            "id": "RT1",
+            "quantity": 2,
+            "name": "Big Right Tri",
+            "metadata": {
+                "shape": "RIGHT_TRIANGLE",
+                "breadth": 600,
+                "height": 400
+            }
+        },
+        {
+            "id": "SCALE1",
+            "quantity": 1,
+            "name": "Scalene Tri",
+            "metadata": {
+                "shape": "SCALENE_TRIANGLE",
+                "breadth": 300,
+                "height": 200
+            }
+        }
+    ]
+}

@@ -21,19 +21,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const partsTbody = document.getElementById('parts-tbody');
     const csvUpload = document.getElementById('csv-upload');
 
+    const shapeModeSelect = document.getElementById('shape-mode-select');
     let selectedEngine = 'maxrects';
     let inputMethod = 'json'; // default
+    let shapeMode = 'rect-only';
 
     // Helper: Add a part row
-    function addPartRow(name = '', w = '', h = '', qty = 1) {
+    function addPartRow(name = '', w = '', h = '', qty = 1, type = 'RECT') {
         const tr = document.createElement('tr');
+        const showShape = (shapeMode === 'shapes');
+        
         tr.innerHTML = `
-            <td><input type="text" class="part-name" value="${name}" placeholder="Part Name"></td>
+            <td class="shape-col" style="${showShape ? '' : 'display: none;'}">
+                <select class="part-type">
+                    <option value="RECT" ${type === 'RECT' ? 'selected' : ''}>Rect</option>
+                    <option value="CIRCLE" ${type === 'CIRCLE' ? 'selected' : ''}>Circle</option>
+                    <option value="RIGHT_TRIANGLE" ${type === 'RIGHT_TRIANGLE' ? 'selected' : ''}>Right Tri</option>
+                    <option value="ISOSCELES_TRIANGLE" ${type === 'ISOSCELES_TRIANGLE' ? 'selected' : ''}>Iso Tri</option>
+                    <option value="SCALENE_TRIANGLE" ${type === 'SCALENE_TRIANGLE' ? 'selected' : ''}>Scalene Tri</option>
+                </select>
+            </td>
+            <td><input type="text" class="part-name" value="${name}" placeholder="Name" style="width: 80px;"></td>
             <td><input type="number" class="part-w" value="${w}" min="1" placeholder="W" style="width: 60px;"></td>
             <td><input type="number" class="part-h" value="${h}" min="1" placeholder="H" style="width: 60px;"></td>
             <td><input type="number" class="part-qty" value="${qty}" min="1" style="width: 50px;"></td>
             <td><button class="icon-btn remove-btn" title="Remove">X</button></td>
         `;
+        
+        const typeSelect = tr.querySelector('.part-type');
+        const wInput = tr.querySelector('.part-w');
+        const hInput = tr.querySelector('.part-h');
+        
+        const updatePlaceholders = () => {
+            const t = typeSelect.value;
+            if (t === 'RECT') {
+                wInput.placeholder = 'W';
+                hInput.placeholder = 'H';
+                hInput.disabled = false;
+                hInput.style.opacity = '1';
+            } else if (t === 'CIRCLE') {
+                wInput.placeholder = 'Radius';
+                hInput.placeholder = '-';
+                hInput.disabled = true;
+                hInput.style.opacity = '0.3';
+                hInput.value = '';
+            } else if (t === 'RIGHT_TRIANGLE' || t === 'ISOSCELES_TRIANGLE' || t === 'SCALENE_TRIANGLE' || t === 'TRIANGLE') {
+                wInput.placeholder = 'Breadth';
+                hInput.placeholder = 'Height';
+                hInput.disabled = false;
+                hInput.style.opacity = '1';
+            }
+        };
+
+        typeSelect.addEventListener('change', updatePlaceholders);
+        updatePlaceholders();
+
         // Setup remove button
         tr.querySelector('.remove-btn').addEventListener('click', () => {
             tr.remove();
@@ -78,6 +120,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 manualInputGroup.style.display = 'block';
             }
         });
+    });
+
+    shapeModeSelect.addEventListener('change', () => {
+        shapeMode = shapeModeSelect.value;
+        const colHeader = document.querySelector('.shape-col');
+        const rows = document.querySelectorAll('.shape-col');
+        const dim1Header = document.getElementById('dim1-header');
+        const dim2Header = document.getElementById('dim2-header');
+
+        if (shapeMode === 'shapes') {
+            rows.forEach(r => r.style.display = 'table-cell');
+            dim1Header.innerText = 'Dim 1';
+            dim2Header.innerText = 'Dim 2';
+        } else {
+            rows.forEach(r => r.style.display = 'none');
+            dim1Header.innerText = 'W';
+            dim2Header.innerText = 'H';
+            // Reset all types to RECT if switching back to simple mode? 
+            // Better to just hide and ignore metadata later.
+        }
     });
 
     // 3. Manual Entry Handlers
@@ -184,6 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
         payload.min_reusable_dim = min_dim ? (parseFloat(min_dim.value) || 100) : 100;
         payload.kerf = kerf_input ? (parseFloat(kerf_input.value) || 0) : 4.0;
         payload.margin = margin_input ? (parseFloat(margin_input.value) || 0) : 10.0;
+        
+        const showScrapLabelsEl = document.getElementById('show-scrap-labels');
+        payload.showScrapLabels = showScrapLabelsEl ? showScrapLabelsEl.checked : true;
 
 
         if (inputMethod === 'json') {
@@ -214,18 +279,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             rows.forEach(row => {
+                const type = shapeMode === 'shapes' ? row.querySelector('.part-type').value : 'RECT';
                 const name = row.querySelector('.part-name').value || `Part-${partIdCounter}`;
                 const w = parseFloat(row.querySelector('.part-w').value) || 0;
                 const h = parseFloat(row.querySelector('.part-h').value) || 0;
                 const qty = parseInt(row.querySelector('.part-qty').value) || 1;
 
-                if (w > 0 && h > 0 && qty > 0) {
+                if (w > 0 && (h > 0 || type === 'CIRCLE') && qty > 0) {
                     for (let i = 0; i < qty; i++) {
+                        let finalW = w;
+                        let finalH = h;
+                        let metadata = { shape: type };
+
+                        if (type === 'CIRCLE') {
+                            finalW = w * 2;
+                            finalH = w * 2;
+                            metadata.radius = w;
+                        } else if (type === 'RIGHT_TRIANGLE' || type === 'ISOSCELES_TRIANGLE' || type === 'SCALENE_TRIANGLE' || type === 'TRIANGLE') {
+                            finalW = w;
+                            finalH = h;
+                            metadata.breadth = w;
+                            metadata.height = h;
+                        }
+
                         parts.push({
                             id: `MANUAL-${partIdCounter++}`,
                             name: qty > 1 ? `${name} (${i+1}/${qty})` : name,
-                            width: w,
-                            height: h
+                            width: finalW,
+                            height: finalH,
+                            metadata: metadata
                         });
                     }
                 }
@@ -255,6 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const fulfillmentChip = document.getElementById('fulfillment-chip');
         if (fulfillmentChip) fulfillmentChip.style.display = 'none';
+        
+        const labelsBtn = document.getElementById('download-labels-btn');
+        if (labelsBtn) labelsBtn.style.display = 'none';
 
         try {
             const response = await fetch('/api/optimize', {
@@ -381,6 +466,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             statusChip.innerText = `Optimization Complete: ${result.engine} engine used.`;
+            
+            if (labelsBtn && result.engine !== 'Scrap Reuse') {
+                labelsBtn.style.display = 'inline-block';
+            }
 
         } catch (error) {
             console.error('Optimization error:', error);
@@ -396,6 +485,13 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadCsvBtn.addEventListener('click', () => {
         window.location.href = '/api/download_inventory';
     });
+    
+    const downloadLabelsBtn = document.getElementById('download-labels-btn');
+    if (downloadLabelsBtn) {
+        downloadLabelsBtn.addEventListener('click', () => {
+            window.location.href = '/api/download_labels';
+        });
+    }
 
     // Init
     fetchJobs();

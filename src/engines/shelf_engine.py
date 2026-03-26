@@ -124,12 +124,14 @@ class ShelfNestingEngine(NestingEngine):
             for r in free_rects:
                 if r.width * r.height >= constraints.min_reusable_area and min(r.width, r.height) >= constraints.min_reusable_dim:
                     current_sheet_res.reusable_scraps.append({
+                        "x": round(r.x, 2),
+                        "y": round(r.y, 2),
                         "width": round(r.width, 2),
                         "height": round(r.height, 2),
                         "area": round(r.width * r.height, 2)
                     })
             
-            current_sheet_res.calculate_metrics()
+            current_sheet_res.calculate_metrics(constraints.min_reusable_area, constraints.min_reusable_dim)
             sheet_results.append(current_sheet_res)
             
             # To prevent infinite loops: if we couldn't place any part on a fresh sheet

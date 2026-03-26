@@ -29,6 +29,13 @@
             "width": 500,
             "height": 500,
             "name": "Batch Part 3"
+        },
+        {
+            "id": "BP4",
+            "metadata": {
+                "shape": "CIRCLE",
+                "radius": 200
+            }
         }
     ]
 }

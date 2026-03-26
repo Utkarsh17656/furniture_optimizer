@@ -1,0 +1,36 @@
+{
+    "job_id": "TRIANGLE-\u00a0TEST-002",
+    "sheet": {
+        "id": "S1",
+        "width": 1200,
+        "height": 1200,
+        "material": "Small Board"
+    },
+    "constraints": {
+        "kerf": 2.0,
+        "margin": 5.0,
+        "allow_rotation": true
+    },
+    "parts": [
+        {
+            "id": "T1",
+            "quantity": 3,
+            "name": "Big Triangle",
+            "metadata": {
+                "shape": "TRIANGLE",
+                "breadth": 400,
+                "height": 300
+            }
+        },
+        {
+            "id": "T2",
+            "quantity": 2,
+            "name": "Small Triangle",
+            "metadata": {
+                "shape": "TRIANGLE",
+                "breadth": 250,
+                "height": 150
+            }
+        }
+    ]
+}

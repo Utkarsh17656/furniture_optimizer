@@ -101,6 +101,40 @@ select:focus {
     border-color: var(--accent);
 }
 
+.engine-select {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+.engine-select:focus {
+    border-color: var(--accent);
+}
+
+.engine-select option {
+    background: #1e293b;
+    color: var(--text-primary);
+}
+
+.parts-input-table select {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    width: 100%;
+}
+
 .engine-toggle {
     display: flex;
     gap: 0.5rem;

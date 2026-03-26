@@ -1,0 +1,4 @@
+id,part_name,width,height,sheet_id,job_name
+RIGHT_TRIANGLE_test_right_triangle_1,Big Right Tri (600x400),600.0,400.0,S1,test_right_triangle.json
+RIGHT_TRIANGLE_test_right_triangle_2,Big Right Tri (600x400),600.0,400.0,S1,test_right_triangle.json
+SCALENE_TRIANGLE_test_right_triangle_3,Scalene Tri (300x200),300.0,200.0,S1,test_right_triangle.json

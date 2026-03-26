@@ -129,22 +129,60 @@ class MaxRectsEngine(NestingEngine):
             )
             current_sheet_res.reusable_waste_area = reusable_area
             
-            # Extract discrete non-overlapping reusable scraps for tracking (greedy approach)
-            valid_rects = [r for r in free_rects if r.width * r.height >= constraints.min_reusable_area and min(r.width, r.height) >= constraints.min_reusable_dim]
-            valid_rects.sort(key=lambda r: r.width * r.height, reverse=True)
+            # Advanced Reusable Scrap Extraction (Recursive Splitting)
+            def subtract_rect(r: Rect, a: Rect) -> List[Rect]:
+                res = []
+                if not r.intersects(a):
+                    return [r]
+                # Left
+                if r.x < a.x:
+                    res.append(Rect(r.x, r.y, a.x - r.x, r.height))
+                # Right
+                if r.x + r.width > a.x + a.width:
+                    res.append(Rect(a.x + a.width, r.y, (r.x + r.width) - (a.x + a.width), r.height))
+                # Bottom
+                if r.y < a.y:
+                    ix1 = max(r.x, a.x)
+                    ix2 = min(r.x + r.width, a.x + a.width)
+                    if ix1 < ix2:
+                        res.append(Rect(ix1, r.y, ix2 - ix1, a.y - r.y))
+                # Top
+                if r.y + r.height > a.y + a.height:
+                    ix1 = max(r.x, a.x)
+                    ix2 = min(r.x + r.width, a.x + a.width)
+                    if ix1 < ix2:
+                        res.append(Rect(ix1, a.y + a.height, ix2 - ix1, (r.y + r.height) - (a.y + a.height)))
+                return res
+
+            candidates = [r for r in free_rects if r.width * r.height >= constraints.min_reusable_area and min(r.width, r.height) >= constraints.min_reusable_dim]
             selected_scraps = []
-            for r in valid_rects:
-                if not any(r.intersects(s) for s in selected_scraps):
-                    selected_scraps.append(r)
+            
+            while candidates:
+                candidates.sort(key=lambda c: c.width * c.height, reverse=True)
+                r = candidates.pop(0)
+                selected_scraps.append(r)
+                
+                new_candidates = []
+                for c in candidates:
+                    if c.intersects(r):
+                        fragments = subtract_rect(c, r)
+                        for f in fragments:
+                            if f.width * f.height >= constraints.min_reusable_area and min(f.width, f.height) >= constraints.min_reusable_dim:
+                                new_candidates.append(f)
+                    else:
+                        new_candidates.append(c)
+                candidates = new_candidates
             
             for s in selected_scraps:
                 current_sheet_res.reusable_scraps.append({
+                    "x": round(s.x, 2),
+                    "y": round(s.y, 2),
                     "width": round(s.width, 2),
                     "height": round(s.height, 2),
                     "area": round(s.width * s.height, 2)
                 })
             
-            current_sheet_res.calculate_metrics()
+            current_sheet_res.calculate_metrics(constraints.min_reusable_area, constraints.min_reusable_dim)
             sheet_results.append(current_sheet_res)
 
         return NestingResult(

@@ -1,0 +1,518 @@
+{
+  "sheet": {
+    "id": "SHEET-STRESS",
+    "width": 2440,
+    "height": 1220,
+    "material": "Plywood 18mm"
+  },
+  "constraints": {
+    "kerf": 4.0,
+    "margin": 10.0,
+    "allow_rotation": true,
+    "min_reusable_area": 46450.0,
+    "min_reusable_dim": 100.0,
+    "cost_per_sheet": 3000
+  },
+  "parts": [
+    {
+      "id": "P001",
+      "name": "Large_Panel_1",
+      "width": 1400,
+      "height": 800,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P002",
+      "name": "Large_Panel_1",
+      "width": 1400,
+      "height": 800,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P003",
+      "name": "Large_Panel_2",
+      "width": 1200,
+      "height": 1000,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P004",
+      "name": "Large_Panel_2",
+      "width": 1200,
+      "height": 1000,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P005",
+      "name": "Long_Strip_1",
+      "width": 2200,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P006",
+      "name": "Long_Strip_1",
+      "width": 2200,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P007",
+      "name": "Long_Strip_1",
+      "width": 2200,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P008",
+      "name": "Long_Strip_1",
+      "width": 2200,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P009",
+      "name": "Long_Strip_2",
+      "width": 1800,
+      "height": 50,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P010",
+      "name": "Long_Strip_2",
+      "width": 1800,
+      "height": 50,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P011",
+      "name": "Long_Strip_2",
+      "width": 1800,
+      "height": 50,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P012",
+      "name": "Long_Strip_2",
+      "width": 1800,
+      "height": 50,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P013",
+      "name": "Long_Strip_3",
+      "width": 2400,
+      "height": 75,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P014",
+      "name": "Long_Strip_3",
+      "width": 2400,
+      "height": 75,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P015",
+      "name": "Medium_Panel",
+      "width": 600,
+      "height": 400,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P016",
+      "name": "Medium_Panel",
+      "width": 600,
+      "height": 400,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P017",
+      "name": "Medium_Panel",
+      "width": 600,
+      "height": 400,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P018",
+      "name": "Medium_Panel",
+      "width": 600,
+      "height": 400,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P019",
+      "name": "Medium_Panel",
+      "width": 600,
+      "height": 400,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P020",
+      "name": "Square_Panel",
+      "width": 500,
+      "height": 500,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P021",
+      "name": "Square_Panel",
+      "width": 500,
+      "height": 500,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P022",
+      "name": "Square_Panel",
+      "width": 500,
+      "height": 500,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P023",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P024",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P025",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P026",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P027",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P028",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P029",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P030",
+      "name": "Small_Filler",
+      "width": 150,
+      "height": 100,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P031",
+      "name": "Tiny_Filler",
+      "width": 80,
+      "height": 80,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P032",
+      "name": "Tiny_Filler",
+      "width": 80,
+      "height": 80,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P033",
+      "name": "Tiny_Filler",
+      "width": 80,
+      "height": 80,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P034",
+      "name": "Tiny_Filler",
+      "width": 80,
+      "height": 80,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P035",
+      "name": "Tiny_Filler",
+      "width": 80,
+      "height": 80,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "P036",
+      "name": "Circle_150",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 150
+      }
+    },
+    {
+      "id": "P037",
+      "name": "Circle_150",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 150
+      }
+    },
+    {
+      "id": "P038",
+      "name": "Circle_400",
+      "width": 400,
+      "height": 400,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 400
+      }
+    },
+    {
+      "id": "P039",
+      "name": "Circle_250",
+      "width": 250,
+      "height": 250,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 250
+      }
+    },
+    {
+      "id": "P040",
+      "name": "Circle_250",
+      "width": 250,
+      "height": 250,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 250
+      }
+    },
+    {
+      "id": "P041",
+      "name": "Tri_200x500",
+      "width": 200,
+      "height": 500,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 200,
+        "height": 500
+      }
+    },
+    {
+      "id": "P042",
+      "name": "Tri_200x500",
+      "width": 200,
+      "height": 500,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 200,
+        "height": 500
+      }
+    },
+    {
+      "id": "P043",
+      "name": "Tri_600x500",
+      "width": 600,
+      "height": 500,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 600,
+        "height": 500
+      }
+    },
+    {
+      "id": "P044",
+      "name": "Tri_200x500",
+      "width": 200,
+      "height": 500,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 200,
+        "height": 500
+      }
+    },
+    {
+      "id": "P045",
+      "name": "Tri_400x150",
+      "width": 400,
+      "height": 150,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 400,
+        "height": 150
+      }
+    },
+    {
+      "id": "P046",
+      "name": "Semi_Circ_300",
+      "width": 300,
+      "height": 150.0,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "P047",
+      "name": "Semi_Circ_300",
+      "width": 300,
+      "height": 150.0,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "P048",
+      "name": "Semi_Circ_300",
+      "width": 300,
+      "height": 150.0,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "P049",
+      "name": "Semi_Circ_300",
+      "width": 300,
+      "height": 150.0,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "P050",
+      "name": "Qtr_Circ_600",
+      "width": 600,
+      "height": 600,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 600
+      }
+    },
+    {
+      "id": "P051",
+      "name": "Qtr_Circ_600",
+      "width": 600,
+      "height": 600,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 600
+      }
+    },
+    {
+      "id": "P052",
+      "name": "Qtr_Circ_200",
+      "width": 200,
+      "height": 200,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 200
+      }
+    },
+    {
+      "id": "P053",
+      "name": "Qtr_Circ_600",
+      "width": 600,
+      "height": 600,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 600
+      }
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "sheet": {
+    "id": "SHEET-COMPLEX",
+    "width": 2400,
+    "height": 1200,
+    "material": "Plywood 18mm"
+  },
+  "constraints": {
+    "kerf": 4.0,
+    "margin": 10.0,
+    "allow_rotation": true,
+    "min_reusable_area": 46450.0,
+    "min_reusable_dim": 100.0,
+    "cost_per_sheet": 3000
+  },
+  "parts": [
+    {
+      "id": "R1",
+      "name": "Rect_Small_Quantity",
+      "width": 300,
+      "height": 200,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R2",
+      "name": "Rect_Small_Quantity",
+      "width": 300,
+      "height": 200,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R3",
+      "name": "Rect_Small_Quantity",
+      "width": 300,
+      "height": 200,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R4",
+      "name": "Rect_Small_Quantity",
+      "width": 300,
+      "height": 200,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R5",
+      "name": "Rect_Small_Quantity",
+      "width": 300,
+      "height": 200,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R6",
+      "name": "Square_Large",
+      "width": 600,
+      "height": 600,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R7",
+      "name": "Rect_Long",
+      "width": 1200,
+      "height": 150,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "R8",
+      "name": "Rect_Long",
+      "width": 1200,
+      "height": 150,
+      "metadata": {
+        "shape": "RECT"
+      }
+    },
+    {
+      "id": "C1",
+      "name": "Circle_Small",
+      "width": 100,
+      "height": 100,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 100
+      }
+    },
+    {
+      "id": "C2",
+      "name": "Circle_Medium",
+      "width": 250,
+      "height": 250,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 250
+      }
+    },
+    {
+      "id": "C3",
+      "name": "Circle_Large",
+      "width": 500,
+      "height": 500,
+      "metadata": {
+        "shape": "CIRCLE",
+        "diameter": 500
+      }
+    },
+    {
+      "id": "T1",
+      "name": "Tri_Right_Small",
+      "width": 200,
+      "height": 150,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 200,
+        "height": 150
+      }
+    },
+    {
+      "id": "T2",
+      "name": "Tri_Right_Small",
+      "width": 200,
+      "height": 150,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 200,
+        "height": 150
+      }
+    },
+    {
+      "id": "T3",
+      "name": "Tri_Isosceles_Large",
+      "width": 800,
+      "height": 400,
+      "metadata": {
+        "shape": "TRIANGLE",
+        "base": 800,
+        "height": 400
+      }
+    },
+    {
+      "id": "SC1",
+      "name": "Semi_Circle_Medium",
+      "width": 300,
+      "height": 150,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "SC2",
+      "name": "Semi_Circle_Medium",
+      "width": 300,
+      "height": 150,
+      "metadata": {
+        "shape": "SEMI_CIRCLE",
+        "diameter": 300
+      }
+    },
+    {
+      "id": "QC1",
+      "name": "Quarter_Circle_Small",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 150
+      }
+    },
+    {
+      "id": "QC2",
+      "name": "Quarter_Circle_Small",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 150
+      }
+    },
+    {
+      "id": "QC3",
+      "name": "Quarter_Circle_Small",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 150
+      }
+    },
+    {
+      "id": "QC4",
+      "name": "Quarter_Circle_Small",
+      "width": 150,
+      "height": 150,
+      "metadata": {
+        "shape": "QUARTER_CIRCLE",
+        "radius": 150
+      }
+    }
+  ]
+}

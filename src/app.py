@@ -54,11 +54,40 @@ def optimize():
         )
         
         for p in job_data.get('parts', []):
+            meta = p.get('metadata', {})
+            shape = meta.get('shape', 'RECT').upper()
+            w = p.get('width', 0)
+            h = p.get('height', 0)
+            
+            # Auto-infer width and height from metadata if omitted
+            if shape == 'CIRCLE':
+                if 'radius' in meta and not w:
+                    w = h = float(meta['radius']) * 2
+                elif 'diameter' in meta and not w:
+                    w = h = float(meta['diameter'])
+            elif shape in ['TRIANGLE', 'RIGHT_TRIANGLE', 'ISOSCELES_TRIANGLE', 'SCALENE_TRIANGLE']:
+                b = meta.get('breadth', meta.get('base'))
+                if b is not None and not w:
+                    w = float(b)
+                if 'height' in meta and not h:
+                    h = float(meta['height'])
+            elif shape == 'SEMI_CIRCLE':
+                if 'diameter' in meta and not w:
+                    w = float(meta['diameter'])
+                    h = w / 2
+                elif 'radius' in meta and not w:
+                    w = float(meta['radius']) * 2
+                    h = float(meta['radius'])
+            elif shape == 'QUARTER_CIRCLE':
+                if 'radius' in meta and not w:
+                    w = h = float(meta['radius'])
+                    
             parts.append(Part(
                 id=p.get('id', 'P1'),
-                width=float(p.get('width', 0)),
-                height=float(p.get('height', 0)),
-                name=p.get('name', '')
+                width=float(w),
+                height=float(h),
+                name=p.get('name', ''),
+                metadata=meta
             ))
             
         constraints_data = job_data.get('constraints')
@@ -80,13 +109,35 @@ def optimize():
         
         # Merge global constraints if provided in the root payload
         if file_constraints:
+            # Smart Merge: If request sends UI defaults, preserve file-specific constraints
+            req_kerf = float(data.get('kerf', 4.0))
+            req_margin = float(data.get('margin', 10.0))
+            req_area = float(data.get('min_reusable_area', 46450.0))
+            req_dim = float(data.get('min_reusable_dim', 100.0))
+
+            # UI defaults (approx)
+            UI_DEF_AREA = 46451.5  # 0.5 * 92903
+            UI_DEF_AREA_ALT = 46450.0
+            UI_DEF_MARGIN = 10.0
+            UI_DEF_KERF = 4.0
+            UI_DEF_DIM = 100.0
+
+            final_kerf = req_kerf if req_kerf != UI_DEF_KERF else file_constraints.kerf
+            final_margin = req_margin if req_margin != UI_DEF_MARGIN else file_constraints.margin
+            
+            # Allow approx match for area
+            is_default_area = abs(req_area - UI_DEF_AREA) < 1.0 or abs(req_area - UI_DEF_AREA_ALT) < 1.0
+            final_area = req_area if not is_default_area else file_constraints.min_reusable_area
+            
+            final_dim = req_dim if req_dim != UI_DEF_DIM else file_constraints.min_reusable_dim
+
             file_constraints = ManufacturingConstraints(
-                kerf=float(data.get('kerf', file_constraints.kerf)),
-                margin=float(data.get('margin', file_constraints.margin)),
+                kerf=final_kerf,
+                margin=final_margin,
                 allow_rotation=file_constraints.allow_rotation,
                 cost_per_sheet=cost_per_sheet,
-                min_reusable_area=float(data.get('min_reusable_area', 46450.0)),
-                min_reusable_dim=float(data.get('min_reusable_dim', 100.0))
+                min_reusable_area=final_area,
+                min_reusable_dim=final_dim
             )
         else:
             file_constraints = ManufacturingConstraints(
@@ -119,10 +170,12 @@ def optimize():
                 try:
                     reusable_scraps.append({
                         "id": row.get("id"),
+                        "type": row.get("type", "SCRAP"),
                         "width": float(row.get("width", 0)),
                         "height": float(row.get("height", 0)),
                         "area": float(row.get("area", 0)),
-                        "source_job": row.get("source_job"),
+                        "sheet_id": row.get("sheet_id", ""),
+                        "source_job": row.get("job_name") or row.get("source_job"),
                         "timestamp": row.get("timestamp"),
                         "used": False
                     })
@@ -145,12 +198,21 @@ def optimize():
             
     # 3. Write back unused scraps
     with open(inventory_csv_path, 'w', newline='') as f:
-        fieldnames = ['id', 'width', 'height', 'area', 'source_job', 'timestamp']
+        fieldnames = ['id', 'type', 'width', 'height', 'area', 'sheet_id', 'job_name', 'timestamp']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for s in reusable_scraps:
             if not s["used"]:
-                writer.writerow({k: s[k] for k in fieldnames})
+                writer.writerow({
+                    "id": s["id"],
+                    "type": s["type"],
+                    "width": s["width"],
+                    "height": s["height"],
+                    "area": s["area"],
+                    "sheet_id": s["sheet_id"],
+                    "job_name": s["source_job"],
+                    "timestamp": s["timestamp"]
+                })
                 
     # Update parts list for engine
     parts = remaining_parts
@@ -223,6 +285,32 @@ def optimize():
                 writer.writerow(row)
                 waste_details.append(row)
         
+        base_job_name = job_filename.replace('.json', '') if job_filename != 'Manual Entry' else 'ManualEntry'
+        base_job_name = base_job_name.replace(' ', '')
+        
+        # Save newly generated reusable scraps & inject IDs BEFORE visualization
+        with open(inventory_csv_path, 'a', newline='') as f:
+            fieldnames = ['id', 'type', 'width', 'height', 'area', 'sheet_id', 'job_name', 'timestamp']
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            scrap_index = 1
+            for s in result.sheets:
+                for scrap in s.reusable_scraps:
+                    scrap_id = f"{base_job_name}_SCRAP_{scrap_index}"
+                    scrap["label_id"] = scrap_id
+                    writer.writerow({
+                        "id": scrap_id,
+                        "type": scrap.get('type', 'SCRAP'),
+                        "width": round(scrap['width'], 2),
+                        "height": round(scrap['height'], 2),
+                        "area": round(scrap['area'], 2),
+                        "sheet_id": s.sheet.id,
+                        "job_name": base_job_name,
+                        "timestamp": timestamp_str
+                    })
+                    scrap_index += 1
+
+        show_scrap_labels = data.get('showScrapLabels', True)
+        
         # Save visualization for frontend
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         viz_filename = f"viz_{timestamp}.png"
@@ -232,26 +320,50 @@ def optimize():
         print("Starting visualization generation...")
         from src.utils.visualizer import Visualizer
         viz = Visualizer()
-        viz.plot_result(result, constraints, save_path=viz_path)
+        viz.plot_result(result, constraints, save_path=viz_path, show_scrap_labels=show_scrap_labels)
         print("Visualization generated.")
         
-        # Save newly generated reusable scraps
-        with open(inventory_csv_path, 'a', newline='') as f:
-            fieldnames = ['id', 'width', 'height', 'area', 'source_job', 'timestamp']
+        # Generate Label CSV
+        labels_csv_path = os.path.join(DATA_DIR, 'labels.csv')
+        
+        with open(labels_csv_path, 'w', newline='') as f:
+            fieldnames = ['id', 'part_name', 'width', 'height', 'sheet_id', 'job_name']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
-            # If we just created it above, it will have a header unless it was totally empty. 
-            # But the 'w' block above always writes a header. So 'a' is safe to just append rows.
-            for s in result.sheets:
-                for scrap in s.reusable_scraps:
-                    scrap_id = f"SCRAP-{uuid.uuid4().hex[:8].upper()}"
+            writer.writeheader()
+            
+            part_index = 1
+            for res_sheet in result.sheets:
+                for placed_part in res_sheet.placed_parts:
+                    orig_part = placed_part.part
+                    metadata = getattr(orig_part, 'metadata', {})
+                    shape_type = metadata.get('shape', 'RECT')
+                    
+                    label_id = f"{shape_type}_{base_job_name}_{part_index}"
+                    part_name = orig_part.name if orig_part.name else f"Part_{part_index}"
+                    
+                    if shape_type == 'CIRCLE':
+                        r = metadata.get('radius', metadata.get('diameter', orig_part.width) / 2)
+                        dim_text = f"R{int(r)}"
+                    elif shape_type == 'TRIANGLE':
+                        b = metadata.get('breadth', metadata.get('base', orig_part.width))
+                        dim_text = f"{int(b)}x{int(orig_part.height)}"
+                    elif shape_type == 'SEMI_CIRCLE':
+                        d = metadata.get('diameter', metadata.get('radius', orig_part.width / 2) * 2)
+                        dim_text = f"Ø{int(d)}"
+                    elif shape_type == 'QUARTER_CIRCLE':
+                        dim_text = f"R{int(metadata.get('radius', orig_part.width))}"
+                    else:
+                        dim_text = f"{int(orig_part.width)}x{int(orig_part.height)}"
+
                     writer.writerow({
-                        "id": scrap_id,
-                        "width": scrap["width"],
-                        "height": scrap["height"],
-                        "area": scrap["area"],
-                        "source_job": job_filename,
-                        "timestamp": timestamp_str
+                        "id": label_id,
+                        "part_name": f"{part_name} ({dim_text})",
+                        "width": orig_part.width,
+                        "height": orig_part.height,
+                        "sheet_id": res_sheet.sheet.id,
+                        "job_name": job_filename
                     })
+                    part_index += 1
         
         # Calculate total cost if missing for base results
         total_material_cost, waste_cost = 0.0, 0.0
@@ -366,6 +478,15 @@ def download_inventory():
         download_name='inventory_report.csv',
         mimetype='text/csv'
     )
+
+@app.route('/api/download_labels', methods=['GET'])
+def download_labels():
+    """Allows downloading the labels CSV file."""
+    labels_path = os.path.join(DATA_DIR, 'labels.csv')
+    if not os.path.exists(labels_path):
+        return jsonify({"error": "Labels file not found"}), 404
+        
+    return send_file(labels_path, as_attachment=True, download_name='labels.csv')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
