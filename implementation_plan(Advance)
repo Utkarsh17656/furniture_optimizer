@@ -1,0 +1,48 @@
+# Implementation Plan - Industrial-Grade Backend Enhancements
+
+The goal is to complete the backend by implementing advanced features found in professional nesting software, such as grain direction control, hole-in-hole nesting, and multi-sheet inventory optimization.
+
+## Proposed Changes
+
+### [Component] Core Models
+#### [MODIFY] [models.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/models/models.py)
+- Add `grain` field to [Part](file:///c:/Users/Utkarsh%20Yadav/Desktop/Furniture_Optimizer/src/models/models.py#4-17) and [Sheet](file:///c:/Users/Utkarsh%20Yadav/Desktop/Furniture_Optimizer/src/models/models.py#18-29) (Options: `NONE`, `HORIZONTAL`, `VERTICAL`).
+- Update [PlacedPart](file:///c:/Users/Utkarsh%20Yadav/Desktop/Furniture_Optimizer/src/models/models.py#30-45) to validate rotation against `grain` constraints.
+- Add `SheetStock` model to handle multiple available sheet sizes and quantities.
+
+### [Component] Nesting Engines
+#### [MODIFY] [nesting_engine.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/engines/nesting_engine.py)
+- Update abstract [optimize](file:///c:/Users/Utkarsh%20Yadav/Desktop/Furniture_Optimizer/src/engines/shape_aware_engine.py#94-183) method to support a list of sheets (stock) instead of a single template.
+
+#### [MODIFY] [maxrects_engine.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/engines/maxrects_engine.py) & [shelf_engine.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/engines/shelf_engine.py)
+- Implement grain direction checks during part placement.
+- Support multi-sheet allocation.
+
+#### [MODIFY] [shape_aware_engine.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/engines/shape_aware_engine.py)
+- **Hole-in-Hole Nesting**: Update mask generation to support hollow shapes (e.g., rings) so smaller parts can be nested inside.
+- Enhance grid search to prioritize filling holes first.
+
+### [Component] Intelligent Optimizer
+#### [MODIFY] [intelligent_engine.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/engines/intelligent_engine.py)
+- Implement a **Sequence-based Genetic Algorithm** to find the optimal order of parts across multiple sheets.
+- Add a "Waste Minimization" strategy that picks the best sheet size from stock for the remaining parts.
+
+### [Component] API & UI
+#### [MODIFY] [app.py](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/src/app.py)
+- Update `/api/optimize` to accept grain constraints and sheet stock inventory.
+- Improve "Scrap Fulfillment" to be shape-aware.
+
+#### [MODIFY] [index.html](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/static/index.html) & [script.js](file:///c:/Users/Utkarsh/Yadav/Desktop/Furniture_Optimizer/static/script.js)
+- Add Grain Direction toggles to the part entry form.
+- Add a "Sheet Inventory" section to define multiple sheet sizes.
+
+## Verification Plan
+### Automated Tests
+- Create a `test_industrial_features.py` script to verify:
+    - Grain constraints are never violated.
+    - Parts are correctly nested inside holes.
+    - The best combination of sheets is selected from a provided stock.
+
+### Manual Verification
+- Run a "Complex Production Job" with mixed grain requirements and verify the [layout.png](file:///c:/Users/Utkarsh%20Yadav/Desktop/Furniture_Optimizer/test_output/complex_shapes_test_20260330_105134/layout.png).
+- Confirm that the efficiency % increases when hole-in-hole nesting is enabled.

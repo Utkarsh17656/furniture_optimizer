@@ -1,8 +1,7 @@
 id,type,width,height,area,sheet_id,job_name,timestamp
-test_right_triangle_SCRAP_1,SCRAP,988.0,588.0,580944.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_2,SCRAP,602.0,200.0,120400.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_3,SCRAP,186.0,602.0,111972.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_4,SCRAP,202.0,286.0,57772.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_5,RIGHT_TRIANGLE,600.0,400.0,120000.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_6,RIGHT_TRIANGLE,400.0,600.0,120000.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
-test_right_triangle_SCRAP_7,RIGHT_TRIANGLE,160.0,300.0,24000.0,S1,test_right_triangle,2026-03-26T17:54:15.121454
+large_production_dataset_SCRAP_1,SCRAP,785.0,107.0,83995.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
+large_production_dataset_SCRAP_2,SCRAP,1176.0,109.0,128184.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
+large_production_dataset_SCRAP_3,SCRAP,1487.0,1200.0,1784400.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
+large_production_dataset_SCRAP_4,SCRAP,563.0,427.0,240401.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
+large_production_dataset_SCRAP_5,SCRAP,242.0,436.0,105512.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
+large_production_dataset_SCRAP_6,SCRAP,445.0,178.0,79210.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205

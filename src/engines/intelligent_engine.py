@@ -5,6 +5,7 @@ from typing import List, Optional, Dict, Tuple
 from src.engines.nesting_engine import NestingEngine
 from src.engines.maxrects_engine import MaxRectsEngine
 from src.engines.shelf_engine import ShelfNestingEngine
+from src.engines.shape_aware_engine import ShapeAwareEngine
 from src.models.models import Part, Sheet, NestingResult, ManufacturingConstraints
 
 class SolutionGenerator:
@@ -12,7 +13,8 @@ class SolutionGenerator:
     def __init__(self):
         self.engines = {
             "MaxRects": MaxRectsEngine(),
-            "Shelf": ShelfNestingEngine()
+            "Shelf": ShelfNestingEngine(),
+            "ShapeAware": ShapeAwareEngine()
         }
 
     def generate_candidates(self, sheet_type: Sheet, parts: List[Part], constraints: ManufacturingConstraints) -> List[Tuple[NestingResult, str]]:
@@ -79,8 +81,10 @@ class Evaluator:
     def score(result: NestingResult) -> float:
         # A lower score is better.
         # Primary: Number of sheets (heavily weighted)
-        # Secondary: Total waste area
-        score = len(result.sheets) * 1000000 + result.total_waste_area
+        # Secondary: Total waste area (which depends on number of sheets)
+        # Tertiary: Overall efficiency (to break ties by rewarding tighter baseline packing)
+        # Note: We subtract efficiency because higher efficiency is better
+        score = len(result.sheets) * 1000000 + result.total_waste_area - (result.overall_efficiency * 10)
         return score
 
 class Selector:

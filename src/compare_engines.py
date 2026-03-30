@@ -1,5 +1,7 @@
 import os
 import sys
+import argparse
+import time
 
 # Ensure project root is in path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -7,12 +9,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.main import load_data
 from src.engines.shelf_engine import ShelfNestingEngine
 from src.engines.maxrects_engine import MaxRectsEngine
+from src.engines.shape_aware_engine import ShapeAwareEngine
 from src.utils.metrics import MetricsCalculator
 from src.utils.visualizer import Visualizer
-
 from src.models.models import ManufacturingConstraints
-
-import argparse
 
 def compare_engines(job_filename: str = None):
     print("=== Furniture Optimizer: Benchmarking Framework ===")
@@ -42,14 +42,17 @@ def compare_engines(job_filename: str = None):
 
     engines = [
         ShelfNestingEngine(),
-        MaxRectsEngine()
+        MaxRectsEngine(),
+        ShapeAwareEngine()
     ]
     
     results = []
 
     for engine in engines:
         print(f"\nEvaluating: {engine.name}...")
+        start_eval = time.time()
         result = engine.optimize(sheet, parts, constraints)
+        print(f"Finished {engine.name} in {time.time() - start_eval:.2f}s")
         results.append((engine.name, result))
         MetricsCalculator.print_summary(result)
 

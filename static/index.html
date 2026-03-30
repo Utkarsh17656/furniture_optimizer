@@ -184,6 +184,7 @@
                         <div id="metric-scrap-cost" class="metric-value" style="color: #ef4444;">- ₹0.00</div>
                     </div>
                 </div>
+                <!-- 
                 <div class="table-container">
                     <table class="waste-table">
                         <thead>
@@ -196,10 +197,10 @@
                             </tr>
                         </thead>
                         <tbody id="comparative-table-body">
-                            <!-- Populated dynamically -->
                         </tbody>
                     </table>
-                </div>
+                </div> 
+                -->
             </section>
 
             <section id="waste-data-section" class="panel waste-data-panel" style="display: none;">
@@ -239,6 +240,26 @@
                 </div>
             </section>
         </main>
+
+        <!-- CSV Preview Modal -->
+        <div id="csv-preview-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="preview-title">CSV Preview</h2>
+                    <button class="icon-btn remove-btn" id="close-preview-btn">X</button>
+                </div>
+                <div class="preview-container">
+                    <table class="preview-table" id="preview-table">
+                        <thead id="preview-thead"></thead>
+                        <tbody id="preview-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="modal-actions">
+                    <button class="cancel-btn" id="cancel-preview-btn">Cancel</button>
+                    <button class="download-confirm-btn" id="confirm-download-btn">Confirm & Download</button>
+                </div>
+            </div>
+        </div>
 
         <footer>
             Built with ❤️ for Furniture Manufacturing Research & Development

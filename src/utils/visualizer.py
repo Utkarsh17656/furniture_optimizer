@@ -44,7 +44,7 @@ class Visualizer:
         # Draw entire sheet as Scrap Waste (Layer 1)
         scrap_bg = patches.Rectangle(
             (0, 0), sheet.width, sheet.height,
-            linewidth=0, facecolor='#fecaca', zorder=1 # Light Red
+            linewidth=0, facecolor='#fff1f2', zorder=1 # Very Light Pink/Red
         )
         ax.add_patch(scrap_bg)
 

@@ -1,0 +1,319 @@
+{
+    "job": "complex_shapes_test",
+    "engine": "Intelligent (MaxRects - Area Descending (No Rotation))",
+    "timestamp": "20260330_110936",
+    "metrics": {
+        "sheets_used": 1,
+        "efficiency": 55.71745059400062,
+        "wastage": 44.28254940599938,
+        "waste_area": 1275337.4228927824,
+        "runtime": 2.018812656402588
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "placed_parts_count": 20
+        }
+    ],
+    "candidates": [
+        {
+            "algorithm": "MaxRects - Area Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "MaxRects - Height Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "MaxRects - Width Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Area Descending",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Area Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Height Descending",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Height Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Width Descending",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Width Descending (No Rotation)",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Randomized 1",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Randomized 2",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Randomized 3",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Randomized 4",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "ShapeAware - Randomized 5",
+            "sheets": 1,
+            "utilization": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.248386842
+        },
+        {
+            "algorithm": "Shelf - Randomized 1",
+            "sheets": 1,
+            "utilization": 55.7174505940006,
+            "wastage": 44.2825494059994,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.2483868427
+        },
+        {
+            "algorithm": "Shelf - Randomized 2",
+            "sheets": 1,
+            "utilization": 55.7174505940006,
+            "wastage": 44.2825494059994,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.2483868427
+        },
+        {
+            "algorithm": "Shelf - Randomized 3",
+            "sheets": 1,
+            "utilization": 55.7174505940006,
+            "wastage": 44.2825494059994,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.2483868427
+        },
+        {
+            "algorithm": "Shelf - Randomized 4",
+            "sheets": 1,
+            "utilization": 55.7174505940006,
+            "wastage": 44.2825494059994,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.2483868427
+        },
+        {
+            "algorithm": "Shelf - Randomized 5",
+            "sheets": 1,
+            "utilization": 55.7174505940006,
+            "wastage": 44.2825494059994,
+            "material_cost": 3000.0,
+            "waste_cost": 1328.4764821799818,
+            "score": 2274780.2483868427
+        },
+        {
+            "algorithm": "MaxRects - Area Descending",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Height Descending",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Width Descending",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Randomized 1",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Randomized 2",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Randomized 3",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Randomized 4",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "MaxRects - Randomized 5",
+            "sheets": 1,
+            "utilization": 54.79706212126922,
+            "wastage": 45.20293787873078,
+            "material_cost": 3000.0,
+            "waste_cost": 1356.0881363619233,
+            "score": 2301296.6402862337
+        },
+        {
+            "algorithm": "Shelf - Area Descending",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        },
+        {
+            "algorithm": "Shelf - Area Descending (No Rotation)",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        },
+        {
+            "algorithm": "Shelf - Height Descending",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        },
+        {
+            "algorithm": "Shelf - Height Descending (No Rotation)",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        },
+        {
+            "algorithm": "Shelf - Width Descending",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        },
+        {
+            "algorithm": "Shelf - Width Descending (No Rotation)",
+            "sheets": 2,
+            "utilization": 27.85872529700031,
+            "wastage": 72.1412747029997,
+            "material_cost": 6000.0,
+            "waste_cost": 4328.476482179982,
+            "score": 6155058.835639813
+        }
+    ]
+}

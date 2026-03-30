@@ -1,0 +1,20 @@
+{
+    "job": "complex_shapes_test",
+    "engine": "Intelligent (MaxRects - Area Descending (No Rotation))",
+    "timestamp": "20260330_105725",
+    "metrics": {
+        "sheets_used": 1,
+        "efficiency": 55.71745059400062,
+        "wastage": 44.28254940599938,
+        "waste_area": 1275337.4228927824,
+        "runtime": 5.829309701919556
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 55.71745059400062,
+            "wastage": 44.28254940599938,
+            "placed_parts_count": 20
+        }
+    ]
+}

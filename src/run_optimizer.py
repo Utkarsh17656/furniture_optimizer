@@ -68,6 +68,7 @@ def run_production_job(input_path: str, engine_name: str, output_dir: str):
         })
     
     with open(json_path, 'w') as f:
+        report_data["candidates"] = getattr(result, 'candidates_data', [])
         json.dump(report_data, f, indent=4)
 
     # B. CSV Summary

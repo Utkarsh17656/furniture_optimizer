@@ -390,28 +390,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const compTableBody = document.getElementById('comparative-table-body');
             
             if (result.candidates_data && result.candidates_data.length > 0) {
-                compTableBody.innerHTML = result.candidates_data.map((c, i) => `
-                    <tr style="${i === 0 ? 'background: rgba(34, 197, 94, 0.1); font-weight: 600;' : ''}">
-                        <td>${c.algorithm || 'Unknown'} ${i === 0 ? '<span class="alg-badge" style="background: var(--success); margin-left:8px;">BEST</span>' : ''}</td>
-                        <td>${c.sheets || 0}</td>
-                        <td>${(c.utilization || 0).toFixed(2)}%</td>
-                        <td>${(c.wastage || 0).toFixed(2)}%</td>
-                        <td>₹${(c.material_cost || 0).toFixed(2)}</td>
-                    </tr>
-                `).join('');
-                compSection.style.display = 'block';
+                if (compTableBody) {
+                    compTableBody.innerHTML = result.candidates_data.map((c, i) => `
+                        <tr style="${i === 0 ? 'background: rgba(34, 197, 94, 0.1); font-weight: 600;' : ''}">
+                            <td>${c.algorithm || 'Unknown'} ${i === 0 ? '<span class="alg-badge" style="background: var(--success); margin-left:8px;">BEST</span>' : ''}</td>
+                            <td>${c.sheets || 0}</td>
+                            <td>${(c.utilization || 0).toFixed(2)}%</td>
+                            <td>${(c.wastage || 0).toFixed(2)}%</td>
+                            <td>₹${(c.material_cost || 0).toFixed(2)}</td>
+                        </tr>
+                    `).join('');
+                }
+                if (compSection) compSection.style.display = 'block';
             } else if (compSection) {
                 // Not intelligent mode, hide it or just show the single result
                 compSection.style.display = 'block';
-                compTableBody.innerHTML = `
-                    <tr style="background: rgba(34, 197, 94, 0.1); font-weight: 600;">
-                        <td>${result.engine || 'Unknown'} <span class="alg-badge" style="background: var(--success); margin-left:8px;">SINGLE</span></td>
-                        <td>${result.metrics.sheets || 0}</td>
-                        <td>${(result.metrics.efficiency || 0).toFixed(2)}%</td>
-                        <td>${(result.metrics.wastage || 0).toFixed(2)}%</td>
-                        <td>₹${result.metrics.material_cost !== undefined ? result.metrics.material_cost.toFixed(2) : '0.00'}</td>
-                    </tr>
-                `;
+                if (compTableBody) {
+                    compTableBody.innerHTML = `
+                        <tr style="background: rgba(34, 197, 94, 0.1); font-weight: 600;">
+                            <td>${result.engine || 'Unknown'} <span class="alg-badge" style="background: var(--success); margin-left:8px;">SINGLE</span></td>
+                            <td>${result.metrics.sheets || 0}</td>
+                            <td>${(result.metrics.efficiency || 0).toFixed(2)}%</td>
+                            <td>${(result.metrics.wastage || 0).toFixed(2)}%</td>
+                            <td>₹${result.metrics.material_cost !== undefined ? result.metrics.material_cost.toFixed(2) : '0.00'}</td>
+                        </tr>
+                    `;
+                }
             }
 
             // Handle Waste Data Table
@@ -480,16 +484,81 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 5. Download CSV Action
+    // 5. CSV Preview & Download logic
+    const previewModal = document.getElementById('csv-preview-modal');
+    const previewTitle = document.getElementById('preview-title');
+    const previewThead = document.getElementById('preview-thead');
+    const previewTbody = document.getElementById('preview-tbody');
+    const closePreviewBtn = document.getElementById('close-preview-btn');
+    const cancelPreviewBtn = document.getElementById('cancel-preview-btn');
+    const confirmDownloadBtn = document.getElementById('confirm-download-btn');
+
+    let currentDownloadUrl = '';
+    let currentFilename = '';
+
+    const showCSVPreview = async (url, title, filename) => {
+        try {
+            const response = await fetch(url);
+            const csvText = await response.text();
+            const lines = csvText.split('\n').map(l => l.trim()).filter(l => l);
+            
+            if (lines.length === 0) {
+                alert("The report is currently empty.");
+                return;
+            }
+
+            previewTitle.innerText = title;
+            currentDownloadUrl = url;
+            currentFilename = filename;
+
+            // Headers
+            const headers = lines[0].split(',');
+            previewThead.innerHTML = `<tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+
+            // Body (limited to first 50 rows for performance)
+            const bodyLines = lines.slice(1, 51);
+            previewTbody.innerHTML = bodyLines.map(line => {
+                const cells = line.split(',');
+                return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+            }).join('');
+
+            if (lines.length > 51) {
+                const footerTr = document.createElement('tr');
+                footerTr.innerHTML = `<td colspan="${headers.length}" style="text-align: center; color: var(--text-secondary); font-style: italic;">... and ${lines.length - 51} more rows.</td>`;
+                previewTbody.appendChild(footerTr);
+            }
+
+            previewModal.style.display = 'flex';
+        } catch (error) {
+            console.error('Error fetching CSV:', error);
+            alert("Could not load preview.");
+        }
+    };
+
+    const hidePreview = () => {
+        previewModal.style.display = 'none';
+        currentDownloadUrl = '';
+    };
+
+    closePreviewBtn.addEventListener('click', hidePreview);
+    cancelPreviewBtn.addEventListener('click', hidePreview);
+    
+    confirmDownloadBtn.addEventListener('click', () => {
+        if (currentDownloadUrl) {
+            window.location.href = currentDownloadUrl;
+            hidePreview();
+        }
+    });
+
     const downloadCsvBtn = document.getElementById('download-csv-btn');
     downloadCsvBtn.addEventListener('click', () => {
-        window.location.href = '/api/download_inventory';
+        showCSVPreview('/api/download_inventory', 'Inventory Report Preview', 'inventory.csv');
     });
     
     const downloadLabelsBtn = document.getElementById('download-labels-btn');
     if (downloadLabelsBtn) {
         downloadLabelsBtn.addEventListener('click', () => {
-            window.location.href = '/api/download_labels';
+            showCSVPreview('/api/download_labels', 'Scrap Labels Preview', 'labels.csv');
         });
     }
 

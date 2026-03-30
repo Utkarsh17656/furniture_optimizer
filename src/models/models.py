@@ -77,13 +77,15 @@ class SheetResult:
             bbox_area = w * h
             
             # 1. Calculate the true area of the placed shape
-            if shape in ['TRIANGLE', 'RIGHT_TRIANGLE', 'ISOSCELES_TRIANGLE', 'SCALENE_TRIANGLE', 'SEMI_CIRCLE']:
+            import math
+            if shape in ['TRIANGLE', 'RIGHT_TRIANGLE', 'ISOSCELES_TRIANGLE', 'SCALENE_TRIANGLE']:
                 true_area = 0.5 * bbox_area
             elif shape == 'CIRCLE':
-                import math
                 true_area = math.pi * ((w/2)**2)
+            elif shape == 'SEMI_CIRCLE':
+                # BBox is D x D/2. Area is 0.5 * pi * (D/2)^2
+                true_area = 0.5 * math.pi * ((w/2)**2)
             elif shape == 'QUARTER_CIRCLE':
-                import math
                 true_area = 0.25 * math.pi * (w**2)
             else:
                 true_area = bbox_area

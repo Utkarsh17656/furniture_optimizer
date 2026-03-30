@@ -1,0 +1,20 @@
+{
+    "job": "complex_shapes_test",
+    "engine": "MaxRects Engine",
+    "timestamp": "20260330_105134",
+    "metrics": {
+        "sheets_used": 1,
+        "efficiency": 54.825581333383575,
+        "wastage": 45.174418666616425,
+        "waste_area": 1301023.2575985529,
+        "runtime": 0.0
+    },
+    "sheets": [
+        {
+            "index": 1,
+            "efficiency": 54.825581333383575,
+            "wastage": 45.174418666616425,
+            "placed_parts_count": 20
+        }
+    ]
+}
