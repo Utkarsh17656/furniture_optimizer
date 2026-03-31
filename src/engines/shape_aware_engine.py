@@ -139,9 +139,6 @@ class ShapeAwareEngine(NestingEngine):
                     cell_w = int(np.ceil(rw / self.resolution))
                     cell_h = int(np.ceil(rh / self.resolution))
                     
-                    if cell_w > grid_w or cell_h > grid_h:
-                        continue
-                        
                     # Get shape mask in grid cells
                     mask = self._get_shape_mask(part, w, h, rotated, cell_w, cell_h)
                     
@@ -158,6 +155,9 @@ class ShapeAwareEngine(NestingEngine):
                             is_rotated=rotated
                         ))
                         placed = True
+                        break
+                    
+                    if placed:
                         break
                 
                 if not placed:

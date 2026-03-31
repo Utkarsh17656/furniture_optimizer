@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const addPartBtn = document.getElementById('add-part-btn');
     const partsTbody = document.getElementById('parts-tbody');
     const csvUpload = document.getElementById('csv-upload');
+    const excelUpload = document.getElementById('excel-upload');
 
     const shapeModeSelect = document.getElementById('shape-mode-select');
-    let selectedEngine = 'maxrects';
+    let selectedEngine = 'intelligent';
     let inputMethod = 'json'; // default
     let shapeMode = 'rect-only';
 
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Toggles
+    /* 
     engineBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             engineBtns.forEach(b => b.classList.remove('active'));
@@ -105,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedEngine = btn.dataset.engine;
         });
     });
+    */
 
     inputMethodBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -145,21 +148,106 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Manual Entry Handlers
     addPartBtn.addEventListener('click', () => addPartRow());
 
+    // Data processing for uploaded files
+    const processImportedData = (rows, uploaderInput, sourceType) => {
+        const uploadError = document.getElementById('upload-error');
+        if (rows.length === 0) {
+            uploadError.innerText = `The uploaded ${sourceType} file is empty.`;
+            uploadError.style.display = 'block';
+            uploaderInput.value = '';
+            return;
+        }
+
+        const headers = rows[0].map(h => String(h).trim().toLowerCase());
+        const nameIdx = headers.indexOf('name');
+        const wIdx = headers.indexOf('width');
+        const hIdx = headers.indexOf('height');
+        const qtyIdx = headers.indexOf('quantity');
+        let typeIdx = headers.indexOf('type');
+        if (typeIdx === -1) typeIdx = headers.indexOf('shape');
+
+        if (nameIdx === -1 || wIdx === -1 || hIdx === -1 || qtyIdx === -1) {
+            uploadError.innerText = `Please upload a valid ${sourceType} file with headers: Name, Width, Height, Quantity. Optional: Type.`;
+            uploadError.style.display = 'block';
+            uploaderInput.value = '';
+            return;
+        }
+
+        let addedCount = 0;
+        let errorRows = [];
+
+        // Helper to parse shape type
+        const parseShapeType = (rawType) => {
+            if (!rawType) return 'RECT';
+            const t = String(rawType).trim().toUpperCase();
+            if (t.includes('RECT') || t.includes('SQUARE')) return 'RECT';
+            if (t.includes('CIRC')) return 'CIRCLE';
+            if (t.includes('RIGHT')) return 'RIGHT_TRIANGLE';
+            if (t.includes('ISO')) return 'ISOSCELES_TRIANGLE';
+            if (t.includes('SCA') || t.includes('TRI')) return 'SCALENE_TRIANGLE';
+            return 'RECT';
+        };
+
+        for (let i = 1; i < rows.length; i++) {
+            const cols = rows[i];
+            if (!cols || cols.length === 0) continue; // skip empty rows
+
+            const name = cols[nameIdx];
+            const w = parseFloat(cols[wIdx]);
+            // Circle doesn't strictly need Height but we should parse it safely
+            let hText = String(cols[hIdx] || '').trim();
+            const h = (hText === '' || hText === '-') ? '-' : parseFloat(cols[hIdx]);
+            const qty = parseInt(cols[qtyIdx]);
+            
+            const rawType = typeIdx !== -1 ? cols[typeIdx] : 'RECT';
+            const type = parseShapeType(rawType);
+
+            // Validation logic
+            let isValid = true;
+            let finalH = 1; // Default dummy for circle
+            if (isNaN(w) || isNaN(qty) || w <= 0 || qty <= 0) {
+                isValid = false;
+            }
+            if (type !== 'CIRCLE') {
+                if (h === '-' || isNaN(h) || h <= 0) isValid = false;
+                else finalH = h;
+            } else {
+                finalH = h === '-' || isNaN(h) ? w : parseFloat(h); // just in case
+            }
+
+            if (!isValid) {
+                errorRows.push(i + 1);
+                continue;
+            }
+
+            addPartRow(name, w, finalH, qty, type);
+            addedCount++;
+        }
+
+        if (errorRows.length > 0) {
+            uploadError.innerText = `Imported ${addedCount} parts. Some rows (${errorRows.join(', ')}) were skipped due to invalid data.`;
+            uploadError.style.display = 'block';
+        } else {
+            statusChip.innerText = `Successfully imported ${addedCount} parts from ${sourceType}.`;
+        }
+
+        uploaderInput.value = ''; // Reset
+    };
+
     // CSV Parsing & Validation
     csvUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        const csvError = document.getElementById('csv-error');
-        if (!csvError) return;
+        const uploadError = document.getElementById('upload-error');
+        if (!uploadError) return;
 
-        csvError.style.display = 'none';
-        csvError.innerText = '';
+        uploadError.style.display = 'none';
+        uploadError.innerText = '';
 
         if (!file) return;
 
-        // 1. File type validation
         if (!file.name.toLowerCase().endsWith('.csv')) {
-            csvError.innerText = "Please upload a valid CSV file.";
-            csvError.style.display = 'block';
+            uploadError.innerText = "Please upload a valid CSV file.";
+            uploadError.style.display = 'block';
             csvUpload.value = '';
             return;
         }
@@ -167,69 +255,51 @@ document.addEventListener('DOMContentLoaded', () => {
         const reader = new FileReader();
         reader.onload = function(event) {
             const text = event.target.result;
-            const rows = text.split('\n').map(r => r.trim()).filter(r => r);
-            
-            if (rows.length === 0) {
-                csvError.innerText = "The uploaded CSV file is empty.";
-                csvError.style.display = 'block';
-                return;
-            }
-
-            // 2. Header validation
-            const expectedHeaders = ["Name", "Width", "Height", "Quantity"];
-            const actualHeaders = rows[0].split(',').map(h => h.trim());
-            
-            const headersMatch = expectedHeaders.every((h, i) => 
-                actualHeaders[i] && actualHeaders[i].toLowerCase() === h.toLowerCase());
-
-            if (!headersMatch) {
-                csvError.innerText = "Please upload a valid CSV file with headers: Name, Width, Height, Quantity";
-                csvError.style.display = 'block';
-                csvUpload.value = '';
-                return;
-            }
-
-            // Clear existing manual parts if user wants a clean slate? 
-            // The prompt says "Populate parts list table", implying adding to it.
-            // But usually validation should be for the whole file.
-
-            let addedCount = 0;
-            let errorRows = [];
-
-            for (let i = 1; i < rows.length; i++) {
-                const cols = rows[i].split(',').map(c => c.trim());
-                
-                // 3. Row data validation
-                if (cols.length < 4) {
-                    errorRows.push(i + 1);
-                    continue;
-                }
-
-                const name = cols[0];
-                const w = parseFloat(cols[1]);
-                const h = parseFloat(cols[2]);
-                const qty = parseInt(cols[3]);
-
-                if (isNaN(w) || isNaN(h) || isNaN(qty) || w <= 0 || h <= 0 || qty <= 0) {
-                    errorRows.push(i + 1);
-                    continue;
-                }
-
-                addPartRow(name, w, h, qty);
-                addedCount++;
-            }
-
-            if (errorRows.length > 0) {
-                csvError.innerText = `Imported ${addedCount} parts. Some rows (${errorRows.join(', ')}) were skipped due to invalid data.`;
-                csvError.style.display = 'block';
-            } else {
-                statusChip.innerText = `Successfully imported ${addedCount} parts from CSV.`;
-            }
-
-            csvUpload.value = ''; // Reset
+            const lines = text.split('\n').map(r => r.trim()).filter(r => r);
+            const rows = lines.map(line => line.split(',').map(c => c.trim()));
+            processImportedData(rows, csvUpload, 'CSV');
         };
         reader.readAsText(file);
     });
+
+    // Excel Parsing & Validation
+    if (excelUpload) {
+        excelUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const uploadError = document.getElementById('upload-error');
+            if (!uploadError) return;
+
+            uploadError.style.display = 'none';
+            uploadError.innerText = '';
+
+            if (!file) return;
+
+            if (!file.name.toLowerCase().match(/\.(xlsx|xls)$/)) {
+                uploadError.innerText = "Please upload a valid Excel file.";
+                uploadError.style.display = 'block';
+                excelUpload.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const data = new Uint8Array(event.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const rows = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+                    processImportedData(rows, excelUpload, 'Excel');
+                } catch (err) {
+                    console.error("Error reading Excel:", err);
+                    uploadError.innerText = "Failed to parse Excel file.";
+                    uploadError.style.display = 'block';
+                    excelUpload.value = '';
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    }
 
     // 4. Run Optimization
     runBtn.addEventListener('click', async () => {

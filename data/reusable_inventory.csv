@@ -1,7 +1,1 @@
 id,type,width,height,area,sheet_id,job_name,timestamp
-large_production_dataset_SCRAP_1,SCRAP,785.0,107.0,83995.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
-large_production_dataset_SCRAP_2,SCRAP,1176.0,109.0,128184.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
-large_production_dataset_SCRAP_3,SCRAP,1487.0,1200.0,1784400.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
-large_production_dataset_SCRAP_4,SCRAP,563.0,427.0,240401.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
-large_production_dataset_SCRAP_5,SCRAP,242.0,436.0,105512.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
-large_production_dataset_SCRAP_6,SCRAP,445.0,178.0,79210.0,PROD-S1,large_production_dataset,2026-03-30T16:02:03.501205
