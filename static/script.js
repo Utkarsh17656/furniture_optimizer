@@ -13,6 +13,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const metricSheets = document.getElementById('metric-sheets');
     const runtimeDisplay = document.getElementById('runtime-display');
 
+    // Theme Toggle Logic
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+        const iconMoon = themeBtn.querySelector('.icon-moon');
+        const iconSun = themeBtn.querySelector('.icon-sun');
+        
+        // Initialize from local storage
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+            document.body.classList.add('light-mode');
+            if(iconMoon) iconMoon.style.display = 'none';
+            if(iconSun) iconSun.style.display = 'inline';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-mode');
+            document.body.classList.toggle('light-mode');
+            
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            if(iconMoon) iconMoon.style.display = isLight ? 'none' : 'inline';
+            if(iconSun) iconSun.style.display = isLight ? 'inline' : 'none';
+        });
+    }
+
     // UI Input Mode
     const inputMethodBtns = document.querySelectorAll('.engine-btn[data-method]');
     const jsonInputGroup = document.getElementById('json-input-group');
